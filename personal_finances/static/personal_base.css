@@ -1,0 +1,25 @@
+.test{
+    display: inline-block;
+    vertical-align: top;
+    margin: 30px;
+
+}
+
+.test-header{
+    font-size: 25px;
+    font-weight: 800;
+    margin: 10px;
+}
+
+.test-block{
+    background-color: rgb(10, 40, 40);
+    border-radius: 5px;
+    color: beige;
+    font-family: 'Montserrat';
+    margin: 10px;
+    padding: 10px;
+}
+
+.form-div{
+
+}

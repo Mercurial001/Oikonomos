@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oikonomos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+</head>
+<body>
+    <div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="fund-name">
+            <input type="number" name="fund-amount">
+            <input name='fund-document' type="file" accept="image/png, image/jpeg, image/gif">
+            <button type="submit" name="add-fund-btn">
+                Add Fund
+            </button>
+        </form>
+    </div>
+    <div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <select name="expense-fund" id="expense-fund-select-field">
+                {% for fund in funds %}
+                    <option value="{{ fund.id }}">
+                        {{ fund.name }}
+                    </option>
+                {% empty %}
+                    <option value="None">None</option>
+                {% endfor %}
+            </select>
+            <input type="text" name="expense-name">
+            <input type="number" name="expense-amount">
+            <input class='income-statement-expense-input'
+                   accept="image/png, image/jpeg, image/gif"
+                   type="file"
+                   name="expense-document">
+            <button type="submit" name="add-expense-btn">
+                Add Expense
+            </button>
+        </form>
+    </div>
+    <div class="test">
+        <div>
+            Funds
+        </div>
+        {% for fund in funds %}
+            <div>
+                {{ fund.name }}
+            </div>
+            <div>
+                {{ fund.amount }}
+            </div>
+            <div>
+                {{ fund.date }}
+            </div>
+        {% empty %}
+            <div>
+                No Available Funds
+            </div>
+        {% endfor %}
+    </div>
+    <div class="test">
+        <div>
+            Expenses
+        </div>
+        {% for expense in expenses %}
+            <div>
+                {{ expense.name }}
+            </div>
+            <div>
+                {{ expense.amount }}
+            </div>
+        {% empty %}
+            <div>
+                No Expenses
+            </div>
+        {% endfor %}
+    </div>
+    <div class="test">
+        <div>
+            Received Funds
+        </div>
+        {% for fund in received_funds %}
+            <div>
+                {{ fund.amount }}
+            </div>
+            <div>
+                {{ fund.name }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="test">
+        <div>
+            Fund Expenditures
+        </div>
+        {% for expense in fund_expenditures %}
+            <div>
+                {{ expense.name }}
+            </div>
+            <div>
+                {{ expense.amount }}
+            </div>
+        {% empty %}
+            <div>
+                No expenditures
+            </div>
+        {% endfor %}
+    </div>
+    <div class="test">
+        <div>
+            Net Balance
+        </div>
+        <div>
+            {{ net_balance.amount }}
+        </div>
+    </div>
+</body>
+</html>
