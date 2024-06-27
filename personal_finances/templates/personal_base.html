@@ -5,148 +5,167 @@
     <meta charset="UTF-8">
     <title>Oikonomos</title>
     <link rel="stylesheet" href="{% static 'personal_base.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 </head>
 <body>
     {% if request.user.username == user.username and request.user.id == user.id %}
-    <div class="form-div">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div>
-                <input type="text" name="personal-fund-name">
-            </div>
-            <div>
-                <input type="number" name="personal-fund-amount">
-            </div>
-            <div>
-                <input name='personal-fund-document' type="file" accept="image/png, image/jpeg, image/gif">
-            </div>
-            <div>
-                <button type="submit" name="add-personal-fund-btn">
-                    Add Fund
-                </button>
-            </div>
-        </form>
-    </div>
-    <div class="form-div">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div>
-                <select name="personal-expense-fund" id="expense-fund-select-field">
-                    {% for fund in personal_funds %}
-                        <option value="{{ fund.id }}">
-                            {{ fund.name }}
-                        </option>
-                    {% empty %}
-                        <option value="None">None</option>
+        <div class="personal-base-nav-bar-div">
+            <ul class="personal-base-unordered-list">
+                <li class="personal-base-list">
+                    <a href="{% url 'homepage' %}">
+                        Home
+                    </a>
+                </li>
+                <li class="personal-base-list">
+                    <a href="{% url 'personal-homepage' request.user %}">
+                        Personal Finances
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="personal-base-block-content-div">
+            {% block content %}
+                <div class="form-div">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div>
+                            <input type="text" name="personal-fund-name">
+                        </div>
+                        <div>
+                            <input type="number" name="personal-fund-amount">
+                        </div>
+                        <div>
+                            <input name='personal-fund-document' type="file" accept="image/png, image/jpeg, image/gif">
+                        </div>
+                        <div>
+                            <button type="submit" name="add-personal-fund-btn">
+                                Add Fund
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="form-div">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div>
+                            <select name="personal-expense-fund" id="expense-fund-select-field">
+                                {% for fund in personal_funds %}
+                                    <option value="{{ fund.id }}">
+                                        {{ fund.name }}
+                                    </option>
+                                {% empty %}
+                                    <option value="None">None</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <input type="text" name="personal-expense-name">
+                        </div>
+                        <div>
+                            <input type="number" name="personal-expense-amount">
+                        </div>
+                        <div>
+                            <input class='income-statement-expense-input'
+                                   accept="image/png, image/jpeg, image/gif"
+                                   type="file"
+                                   name="personal-expense-document">
+                        </div>
+                        <div>
+                            <button type="submit" name="add-personal-expense-btn">
+                                Add Expense
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="test">
+                    <div class="test-header">
+                        Received Funds
+                    </div>
+                    {% for fund in personal_received_funds %}
+                        <div class="test-block">
+                            <div>
+                                {{ fund.amount }}
+                            </div>
+                            <div>
+                                {{ fund.name }}
+                            </div>
+                        </div>
                     {% endfor %}
-                </select>
-            </div>
-            <div>
-                <input type="text" name="personal-expense-name">
-            </div>
-            <div>
-                <input type="number" name="personal-expense-amount">
-            </div>
-            <div>
-                <input class='income-statement-expense-input'
-                       accept="image/png, image/jpeg, image/gif"
-                       type="file"
-                       name="personal-expense-document">
-            </div>
-            <div>
-                <button type="submit" name="add-personal-expense-btn">
-                    Add Expense
-                </button>
-            </div>
+                </div>
+                <div class="test">
+                    <div class="test-header">
+                        Funds
+                    </div>
+                    {% for fund in personal_funds %}
+                        <div class="test-block">
+                            <div>
+                                {{ fund.name }}
+                            </div>
+                            <div>
+                                {{ fund.amount }}
+                            </div>
+                            <div>
+                                {{ fund.date }}
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div>
+                            No Available Funds
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="test">
+                    <div class="test-header">
+                        Expenses
+                    </div>
+                    {% for expense in personal_expenses %}
+                        <div class="test-block">
+                            <div>
+                                {{ expense.name }}
+                            </div>
+                            <div>
+                                {{ expense.amount }}
+                            </div>
+                        </div>
 
-        </form>
-    </div>
-    <div class="test">
-        <div class="test-header">
-            Funds
+                    {% empty %}
+                        <div>
+                            No Expenses
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="test">
+                    <div class="test-header">
+                        Fund Expenditures
+                    </div>
+                    {% for expense in personal_expense_funds %}
+                        <div class="test-block">
+                            <div>
+                                {{ expense.name }}
+                            </div>
+                            <div>
+                                {{ expense.amount }}
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div>
+                            No expenditures
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="test">
+                    <div class="test-header">
+                        Net Balance
+                    </div>
+                    <div class="test-block">
+                        {{ personal_net_worth.amount }}
+                    </div>
+                </div>
+            {% endblock %}
         </div>
-        {% for fund in personal_funds %}
-            <div class="test-block">
-                <div>
-                    {{ fund.name }}
-                </div>
-                <div>
-                    {{ fund.amount }}
-                </div>
-                <div>
-                    {{ fund.date }}
-                </div>
-            </div>
-        {% empty %}
-            <div>
-                No Available Funds
-            </div>
-        {% endfor %}
-    </div>
-    <div class="test">
-        <div class="test-header">
-            Expenses
-        </div>
-        {% for expense in personal_expenses %}
-            <div class="test-block">
-                <div>
-                    {{ expense.name }}
-                </div>
-                <div>
-                    {{ expense.amount }}
-                </div>
-            </div>
-
-        {% empty %}
-            <div>
-                No Expenses
-            </div>
-        {% endfor %}
-    </div>
-    <div class="test">
-        <div class="test-header">
-            Received Funds
-        </div>
-        {% for fund in personal_received_funds %}
-            <div class="test-block">
-                <div>
-                    {{ fund.amount }}
-                </div>
-                <div>
-                    {{ fund.name }}
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="test">
-        <div class="test-header">
-            Fund Expenditures
-        </div>
-        {% for expense in personal_expense_funds %}
-            <div class="test-block">
-                <div>
-                    {{ expense.name }}
-                </div>
-                <div>
-                    {{ expense.amount }}
-                </div>
-            </div>
-        {% empty %}
-            <div>
-                No expenditures
-            </div>
-        {% endfor %}
-    </div>
-    <div class="test">
-        <div class="test-header">
-            Net Balance
-        </div>
-        <div class="test-block">
-            {{ personal_net_worth.amount }}
-        </div>
-    </div>
     {% else %}
-    You Are not Authorized to Access this Page
+        You Are not Authorized to Access this Page
     {% endif %}
 </body>
 </html>

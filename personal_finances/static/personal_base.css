@@ -1,14 +1,43 @@
+body{
+    margin: 0;
+}
+
+.personal-base-nav-bar-div{
+    width:20%;
+    float: left;
+    position: fixed;
+    background-color: rgb(10, 40, 40);
+    height: 100vh;
+}
+
+.personal-base-unordered-list{
+    list-style: none;
+}
+
+.personal-base-list{
+    font-family: 'Montserrat';
+    color: beige;
+    margin: 10px;
+}
+
+.personal-base-block-content-div{
+    width: 80%;
+    float: right;
+}
+
 .test{
     display: inline-block;
     vertical-align: top;
-    margin: 30px;
+    margin: 1px;
 
 }
 
 .test-header{
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 800;
-    margin: 10px;
+    margin: 1px;
+    font-family: 'Montserrat';
+    text-align: center;
 }
 
 .test-block{
@@ -16,7 +45,7 @@
     border-radius: 5px;
     color: beige;
     font-family: 'Montserrat';
-    margin: 10px;
+    margin: 5px;
     padding: 10px;
 }
 

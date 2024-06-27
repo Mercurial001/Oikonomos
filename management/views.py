@@ -59,6 +59,8 @@ def index(request):
 
             expense_fund = Fund.objects.get(id=expense_fund_id)
             expense_fund.amount -= float(expense_amount)
+            expense_fund.date = timezone.now().date()
+            expense_fund.date_time = timezone.now()
             expense_fund.save()
 
             expense, created_expense = Expense.objects.get_or_create(
