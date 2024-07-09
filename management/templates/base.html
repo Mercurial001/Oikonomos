@@ -5,278 +5,170 @@
     <title>Oikonomos</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'personal_base.css' %}">
+    <link rel="stylesheet" href="{% static 'privacy-policy.css' %}">
+    <link rel="stylesheet" href="{% static 'terms-of-use.css' %}">
+    <link rel="stylesheet" href="{% static 'about.css' %}">
+    <link rel="stylesheet" href="{% static 'contact-me.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <script src="{% static 'chart.umd.js' %}"></script>
+    <script src="{% static 'jquery-3.6.4.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js"></script>
+
 </head>
 <body>
-    <div class="base-nav-bar-div">
-        <ul class="base-unordered-list">
-            <li class="base-list">
-                <a class="base-list-nav-link" href="{% url 'homepage' %}">
+    <section class="base-utmost-container-section">
+        <header class="base-header">
+            <div class="base-user-authenticated-finances-link-div">
+                <a class="base-user-authenticated-finances-link"
+                   href="{% url 'homepage' %}">
                     Home
                 </a>
-            </li>
-            <li class="base-list">
-                <a class="base-list-nav-link" href="{% url 'personal-homepage' request.user %}">
-                    Personal Finances
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="base-block-content-container-div">
-        {% block content %}
-            <div class="base-finance-title-header-div">
+            </div>
+            {% if not request.user.is_authenticated  %}
+                <ul class="base-unordered-list">
+                    <li class="base-list-link">
+                        <a class="base-page-link"
+                           id='base-login-link'
+                           href="{% url 'login' %}">
+                            Sign In
+                        </a>
+                    </li>
+                    <li class="base-list-link">
+                        <a class="base-page-link"
+                           id="base-registration-link"
+                           href="{% url 'registration' %}">
+                            Sign up
+                        </a>
+                    </li>
+                </ul>
+            {% else %}
+                <div class="base-user-authenticated-finances-link-div">
+                    <a class="base-user-authenticated-finances-link"
+                       href="{% url 'personal-homepage' request.user.username %}">
+                        Personal Finances
+                    </a>
+                </div>
+            {% endif %}
+        </header>
+        <div class="base-showcase-section">
+            <div class="base-page-showcase-title-div">
                 Oikonomos
             </div>
-            <div class="base-finance-net-balance-div">
-                <div class="base-finance-net-balance-label-div">
-                    Net Balance
-                </div>
-                <div class="base-finance-net-balance-amount-div">
-                    {{ net_balance.amount }}
-                </div>
+            <div class="base-page-showcase-subtitle-div">
+                track, manage expenses and finances
             </div>
-            <div class="base-form-finance-div" id="base-finance-form1">
-                <div class="base-form-finance-header-div">
-                    Fund Form
-                </div>
-                <form class="base-finance-form" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="base-finance-form-input-div">
-                        <div class="base-finance-form-label-div">
-                            Fund Name *
+        </div>
+        <div class="base-information-block-div">
+            {% block content %}
+                <div class="base-block-element-container-div">
+                    <div class="base-block-element-div">
+                        <div class="base-block-element-title-div">
+                            Current Features
                         </div>
-                        <input class='base-finance-form-input'
-                               type="text" name="fund-name"
-                               required>
-                    </div>
-                    <div class="base-finance-form-input-div">
-                        <div class="base-finance-form-label-div">
-                            Fund Amount *
-                        </div>
-                        <input class='base-finance-form-input'
-                               type="number" name="fund-amount"
-                               required>
-                    </div>
-                    <div class="base-finance-form-input-div">
-                        <div class="base-finance-form-label-div">
-                            Fund Document
-                        </div>
-                        <input class='base-finance-form-input'
-                               name='fund-document' type="file"
-                               accept="image/png, image/jpeg, image/gif">
-                    </div>
-                    <div class="base-finance-form-btn-div">
-                        <button class='base-finance-form-btn'
-                                id="base-finance-add-fund-btn"
-                                type="submit"
-                                name="add-fund-btn">
-                            Add Fund
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div class="base-form-finance-div" id="base-finance-form2">
-                <div class="base-form-finance-header-div">
-                    Expense Form
-                </div>
-                <form class="base-finance-form" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="base-finance-form-input-div">
-                        <div class="base-finance-form-label-div">
-                            Choose a Fund *
-                        </div>
-                        <select class='base-finance-form-input'
-                                name="expense-fund" id="expense-fund-select-field" required>
-                            {% for fund in funds %}
-                                <option value="{{ fund.id }}">
-                                    {{ fund.name }}
-                                </option>
-                            {% empty %}
-                                <option value="None">None</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="base-finance-form-input-div">
-                        <div class="base-finance-form-label-div">
-                            Expense Name *
-                        </div>
-                        <input class='base-finance-form-input' type="text" name="expense-name"
-                               required>
-                    </div>
-                    <div class="base-finance-form-input-div">
-                        <div class="base-finance-form-label-div">
-                            Expense Amount *
-                        </div>
-                        <input class='base-finance-form-input' type="number" name="expense-amount"
-                               required>
-                    </div>
-                    <div class="base-finance-form-input-div">
-                        <div class="base-finance-form-label-div">
-                            Expense Document
-                        </div>
-                        <input class='base-finance-form-input'
-                               accept="image/png, image/jpeg, image/gif"
-                               type="file"
-                               name="expense-document"
-                        >
-                    </div>
-                    <div class="base-finance-form-btn-div">
-                        <button class='base-finance-form-btn'
-                                id="base-finance-add-expense-btn"
-                                type="submit" name="add-expense-btn">
-                            Add Expense
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div>
+                        <div class="base-block-element-description-div">
+                            <ul class="base-block-element-lists">
+                                <li class="base-block-element-list">
+                                    Track Expenses
+                                </li>
+                                <li class="base-block-element-list">
+                                    Track Financial Flow
+                                </li>
+                                <li class="base-block-element-list">
+                                    Data Visualization & Analytics
+                                </li>
+                                <li class="base-block-element-list">
+                                    Add Fund Source
+                                </li>
+                                <li class="base-block-element-list">
+                                    Dynamic Fund Source
+                                </li>
+                                <li class="base-block-element-list">
+                                    Fund Transfer
+                                </li>
+                                <li class="base-block-element-list">
+                                    User Friendly Interface
+                                </li>
+                                <li class="base-block-element-list">
+                                    Seamless Expense Categorization
+                                </li>
+                            </ul>
+                            <div class="base-block-element-message-div">
 
-                <div>
-                    Received Funds
+                            </div>
+                        </div>
+                    </div>
+                    <div class="base-block-element-div">
+                        <div class="base-block-element-title-div">
+                            Future Implementations
+                        </div>
+                        <ul class="base-block-element-lists">
+                            <li class="base-block-element-list">
+                                Machine Learning Model Integration
+                            </li>
+                            <li class="base-block-element-list">
+                                Deep Learning Model Integration
+                            </li>
+                            <li class="base-block-element-list">
+                               Budget Allocation
+                            </li>
+                            <li class="base-block-element-list">
+                               Budget Scheduling
+                            </li>
+                            <li class="base-block-element-list">
+                               Achievements & Badges
+                            </li>
+                            <li class="base-block-element-list">
+                               Articles
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="base-block-element-div">
+                        <div class="base-block-element-title-div">
+                            Security & Privacy
+                        </div>
+                        <ul class="base-block-element-lists">
+                            <li class="base-block-element-list">
+                                <a class="base-block-element-list-link"
+                                   href="{% url 'privacy-policy' %}">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                            <li class="base-block-element-list">
+                                <a class="base-block-element-list-link"
+                                   href="{% url 'terms-of-use' %}">
+                                    Terms of Service
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <table>
-                    <tr>
-                        <th>
-                            Fund Name
-                        </th>
-                        <th>
-                            Fund Amount
-                        </th>
-                        <th>
-                            Acquired Date
-                        </th>
-                    </tr>
-                    {% for fund in received_funds %}
-                        <tr>
-                            <td>
-                                {{ fund.name }}
-                            </td>
-                            <td>
-                                {{ fund.amount }}
-                            </td>
-                            <td>
-                                {{ fund.date }}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
+            {% endblock %}
+        </div>
+        <footer class="base-footer">
+            <div class="base-footer-copyright-div">
+                © 2024 Oikonomos
             </div>
-            <div>
-                <div>
-                    Funds
-                </div>
-                <table>
-                    <tr>
-                        <th>
-                            Fund Name
-                        </th>
-                        <th>
-                            Fund Amount
-                        </th>
-                        <th>
-                            Last Spend Date
-                        </th>
-                    </tr>
-                    {% for fund in funds %}
-                        <tr>
-                            <td>
-                                {{ fund.name }}
-                            </td>
-                            <td>
-                                {{ fund.amount }}
-                            </td>
-                            <td>
-                                {{ fund.date }}
-                            </td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="3">No Available Funds</td>
-                        </tr>
-                    {% endfor %}
-                </table>
+            <div class="base-footer-details-div">
+                <ul class="base-footer-detail-lists">
+                    <li class="base-footer-detail-list">
+                        <a class='base-footer-link' href="{% url 'about' %}">
+                            About
+                        </a>
+                    </li>
+                    <li class="base-footer-detail-list">
+                        <a class='base-footer-link' href="{% url 'contact-us' %}">
+                            Contact Me
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div>
-                <div>
-                    Expenses
-                </div>
-                <table>
-                    <tr>
-                        <th>
-                            User
-                        </th>
-                        <th>
-                            Expense Name
-                        </th>
-                        <th>
-                            Expense Amount
-                        </th>
-                        <th>
-                            Expense Date
-                        </th>
-                    </tr>
-                    {% for expense in expenses %}
-                        <tr>
-                            <td>
-                                {{ expense.personnel }}
-                            </td>
-                            <td>
-                                {{ expense.name }}
-                            </td>
-                            <td>
-                                {{ expense.amount }}
-                            </td>
-                            <td>
-                                {{ expense.date }}
-                            </td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="4">
-                                No Expense
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-            <div>
-                <div>
-                    Fund Expenditures
-                </div>
-                <table>
-                    <tr>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Amount
-                        </th>
-                        <th>
-                            Date
-                        </th>
-                    </tr>
-                    {% for expense in fund_expenditures %}
-                        <tr>
-                            <td>
-                                {{ expense.name }}
-                            </td>
-                            <td>
-                                {{ expense.amount }}
-                            </td>
-                            <td>
-                                {{ expense.date }}
-                            </td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="3">
-                                No expenditures
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        {% endblock %}
-    </div>
+        </footer>
+    </section>
+    <script>
+        autosize(document.querySelectorAll('.auto-growth'));
+    </script>
 </body>
 </html>

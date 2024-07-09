@@ -1,12 +1,13 @@
 body{
     margin: 0;
+/*    background-color: rgb(40, 40, 40);*/
 }
 
 .personal-base-nav-bar-div{
     width:20%;
     float: left;
     position: fixed;
-    background-color: rgb(10, 40, 40);
+    background-image: linear-gradient(to bottom right, rgb(5, 104, 48), rgb(17, 207, 99), rgb(128, 247, 179));
     height: 100vh;
 }
 
@@ -20,35 +21,611 @@ body{
     margin: 10px;
 }
 
+.personal-base-nav-link{
+    color: beige;
+    text-decoration: none;
+}
+
 .personal-base-block-content-div{
     width: 80%;
     float: right;
 }
 
-.test{
-    display: inline-block;
-    vertical-align: top;
-    margin: 1px;
-
+.base-finance-net-balance-div{
+    margin-left: 43px;
+    margin-bottom: 10px;
+    background-image: linear-gradient(
+        to bottom right,
+        rgb(28, 181, 92),
+        rgb(45, 195, 107),
+        rgb(118, 249, 173)
+    );
+    width: 200px;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.test-header{
-    font-size: 20px;
+.base-finance-net-balance-label-div{
+    padding: 5px;
+    font-size: 18px;
     font-weight: 800;
-    margin: 1px;
-    font-family: 'Montserrat';
-    text-align: center;
+    margin-left: 6px;
 }
 
-.test-block{
-    background-color: rgb(10, 40, 40);
-    border-radius: 5px;
+.base-finance-net-balance-amount-div{
+    font-size: 15px;
     color: beige;
     font-family: 'Montserrat';
-    margin: 5px;
+    margin-left: 20px;
+
+}
+
+.base-finance-net-balance-label-div{
+    font-family: 'Montserrat';
+    color: beige;
+}
+
+.personal-base-header-title{
+    text-align: center;
+    margin: 10px;
+    font-family: 'Montserrat';
+    font-size:30px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: rgb(125, 218, 88);
+}
+
+.personal-base-toggle-btns-container-div{
+    position: absolute;
+    top: 10px;
+    right:20px;
+}
+
+.personal-base-toggle-form-btn{
+    font-family: 'Montserrat';
+    cursor: pointer;
+    border-radius: 5px;
+    color: beige;
+}
+
+#toggle-form1{
+    background-image: linear-gradient(to bottom right,rgb(4, 202, 89), rgb(54, 214, 123), rgb(61, 244, 141));
+    border: 1px solid rgb(14, 205, 97);
+}
+
+#toggle-form2{
+    background-image: linear-gradient(to bottom right, rgb(241, 192, 29), rgb(249, 177, 96));
+    border: 1px solid rgb(249, 202, 49);
+}
+
+#toggle-form3{
+    background-image: linear-gradient(to bottom right, rgb(4, 104, 89), rgb(11, 151, 130), rgba(87, 236, 214, 0.7));
+    border: 1px solid rgb(47, 171, 152);
+}
+
+
+.base-form-finance-header-div{
+    background-image: linear-gradient(to bottom right, rgb(9, 170, 79), rgb(18, 204, 99), rgb(33, 240, 122), rgb(67, 235, 23));
+    text-align: left;
+    font-family: 'Montserrat';
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: beige;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+
+
+.base-form-finance-div{
+    background-image: linear-gradient(to bottom right, rgb(236, 252, 243), rgb(246, 252, 249));
+    position: absolute;
+    top: 55%;
+    left: 60%;
+    transform: translate(-60%, -60%);
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgb(63, 242, 152);
+    display: none;
+}
+
+#base-finance-form3{
+    width: 23.9%;
+}
+
+.base-form-finance-div-show{
+    display:block;
+}
+
+.base-finance-form{
     padding: 10px;
 }
 
-.form-div{
+.base-finance-form-label-div{
+    text-align: left;
+    font-family: 'Montserrat';
+    font-size: 12px;
 
+}
+
+.base-finance-form-input-div{
+    margin: 10px;
+}
+
+.base-finance-form-input{
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(39, 151, 9);
+}
+
+.base-finance-form-input:focus{
+    outline: none;
+}
+
+.base-finance-form-btn{
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Montserrat';
+    color: beige;
+}
+
+#base-finance-add-expense-btn{
+    background-image: linear-gradient(to bottom right, rgb(241, 192, 29), rgb(249, 177, 96));
+    border: 1px solid rgb(249, 202, 49);
+}
+
+#base-finance-add-fund-btn{
+    background-image: linear-gradient(to bottom right,rgb(4, 202, 89), rgb(54, 214, 123), rgb(61, 244, 141));
+    border: 1px solid rgb(14, 205, 97);
+}
+
+#base-finance-transfer-fund-btn{
+    background-image: linear-gradient(to bottom right, rgb(4, 104, 89), rgb(11, 151, 130), rgba(87, 236, 214, 0.7));
+    border: 1px solid rgb(47, 171, 152);
+}
+
+.personal-base-finances-panel-div{
+    background-color: rgb(169, 251, 171);
+    margin: auto;
+    width: 90%;
+    padding: 8px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid rgb(5, 182, 11);
+    overflow: hidden;
+    height: 76.22vh;
+}
+
+.personal-base-finances-toggle-finances-btn-container-div{
+    text-align: center;
+    margin-top: -40px;
+    margin-bottom: 10px;
+}
+
+.personal-base-toggle-finance-mode-btn{
+    font-family: 'Montserrat';
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    color: beige;
+    cursor: pointer;
+}
+
+#toggle-finance-mode-btn1{
+    background-color: rgba(58, 193, 20, 0.7);
+    border: 1px solid rgb(57, 202, 17);
+}
+
+#toggle-finance-mode-btn2{
+    background-image: linear-gradient(to bottom right, rgb(241, 192, 29), rgb(249, 177, 96));
+    border: 1px solid rgb(230, 154, 10);
+}
+
+.personal-base-finance-mode-div{
+    display: none;
+}
+
+#finance-mode1{
+}
+
+#finance-mode2{
+}
+
+.finance-mode-show{
+    display: block;
+}
+
+.personal-base-finances-panel-title-header-div{
+    font-family: 'Montserrat';
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.personal-base-finances-block-element{
+    background-image: linear-gradient(
+        to bottom right,
+        rgb(28, 181, 92),
+        rgb(45, 195, 107),
+        rgb(118, 249, 173)
+    );
+    width: 440px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 10px;
+    border-radius: 10px;
+    color: beige;
+    font-family: 'Montserrat';
+}
+
+#personal-base-received-funds{
+    float: right;
+}
+
+#personal-base-fund{
+    float: left;
+}
+
+
+.personal-base-finances-data-container-div{
+    max-height: 200px;
+    overflow-y:scroll;
+}
+
+.personal-base-finances-data-element-div{
+    border: 1px solid rgb(34, 247, 136);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: 'Montserrat';
+}
+
+.personal-base-funds-container-div{
+    float:left;
+    background-image: linear-gradient(
+        to bottom right,
+        rgb(28, 181, 92),
+        rgb(45, 195, 107),
+        rgb(118, 249, 173)
+    );
+    width: 45%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: 'Montserrat';
+    color: beige;
+    margin-left: 40px;
+}
+
+.personal-base-funds-container-title-header-div{
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.personal-base-fund-data-container-div{
+    overflow-y: scroll;
+    max-height: 200px;
+}
+
+.personal-base-fund-data-div{
+    background-color: rgb(41, 200, 118);
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 90%;
+    overflow: hidden;
+    border: 1px solid rgb(82, 246, 161);
+}
+
+.personal-base-fund-details-div{
+    float: left;
+}
+
+.personal-base-fund-name-toggle-div{
+    overflow: hidden;
+}
+
+.personal-base-fund-name-div{
+    font-size: 12px;
+    width: 200px;
+    font-weight: 800;
+    float: left;
+}
+
+.personal-base-fund-amount-div{
+    margin-left: 10px;
+    overflow: hidden;
+    transition: .5s all ease-in-out;
+    max-height: 100px;
+}
+
+.personal-base-fund-amount-hide{
+    max-height: 0px;
+    transition: .5s all ease-in-out;
+}
+
+.personal-base-add-fund-form{
+    max-height: 0px;
+    overflow: hidden;
+    transition: .5s all ease-in-out;
+}
+
+.personal-base-add-fund-form-show{
+    max-height: 100px;
+    transition: .5s all ease-in-out;
+}
+
+.personal-base-toggle-add-fund-form{
+    float: right;
+}
+
+.personal-base-remove-fund-data-func-div{
+    float: right;
+}
+
+.personal-base-add-fund-input{
+    border: 1px solid rgb(38, 182, 56);
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.personal-base-toggle-add-fund-form-btn{
+    background: none;
+    font-weight: 800;
+    border: 1px solid rgb(12, 143, 8);
+    border-radius: 5px;
+    color: beige;
+    cursor: pointer;
+    width: 25px;
+}
+
+.personal-base-add-fund-input:focus{
+    outline: none;
+}
+
+.personal-base-add-fund-btn{
+    background-color: rgb(11, 190, 34);
+    color: beige;
+    border: 1px solid rgb(12, 226, 41);
+    font-family: 'Montserrat';
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.personal-base-remove-fund-form{
+    display: none;
+}
+
+.personal-base-remove-fund-prompt-label{
+    font-size: 10px;
+    font-family: 'Montserrat';
+    text-align: center;
+    color: beige;
+}
+
+.personal-base-remove-fund-form-show{
+    display: block;
+}
+
+.personal-base-remove-fund-data-btn{
+    margin-top: 10px;
+    background-image: linear-gradient(to bottom right, rgb(227, 132, 7), rgb(242, 147, 24), rgba(252, 176, 77, 0.6));
+    border: 1px solid rgb(225, 130, 8);
+    border-radius: 5px;
+    font-family: 'Montserrat';
+    cursor: pointer;
+    color: beige;
+    display: block;
+}
+
+.personal-base-true-remove-fund-data-btn{
+    background-image: linear-gradient(to bottom right, rgb(183, 14, 5), rgb(219, 21, 11), rgba(240, 86, 78, 0.7));
+    font-family: 'Montserrat';
+    color: beige;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid rgb(185, 18, 9);
+}
+
+.personal-base-cancel-remove-fund-data-btn{
+    background-image: linear-gradient(to bottom right, rgb(4, 104, 89), rgb(11, 151, 130), rgba(87, 236, 214, 0.7));
+    border: 1px solid rgb(47, 171, 152);
+    font-family: 'Montserrat';
+    color: beige;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.personal-base-remove-fund-data-btn-hide{
+    display: none;
+}
+
+#funds-graph-chart{
+    float: left;
+}
+
+#fundsGraphChart{
+
+}
+
+#funds-donut-chart{
+    float: right;
+}
+
+#fundsDonutChart{
+    margin-left: 40px;
+}
+
+/*Expenses*/
+
+.personal-base-expenses-container-div{
+    display: none;
+}
+
+.personal-base-finance-mode-expense{
+    background-image: linear-gradient(
+        to bottom right,
+        rgb(28, 181, 92),
+        rgb(45, 195, 107),
+        rgb(118, 249, 173)
+    );
+    padding: 10px;
+    border-radius: 10px;
+    width: 440px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#personal-base-expenses{
+    float: left;
+}
+
+#personal-base-fund-expenditure{
+    float: right;
+}
+
+.personal-base-finance-mode-expense-header-title{
+    font-size: 20px;
+    color: beige;
+    font-weight: 800;
+    font-family: 'Montserrat';
+}
+
+.personal-base-expense-data-container-div{
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.personal-base-expense-data{
+    background-color: rgb(41, 200, 118);
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 90%;
+    overflow: hidden;
+    border: 1px solid rgb(82, 246, 161);
+}
+
+.personal-base-expense-data-details{
+    float: left;
+    font-family: 'Montserrat';
+    color: beige;
+}
+
+.personal-base-expense-data-name{
+    font-weight: 800;
+    font-size: 12px;
+    width: 200px;
+}
+
+.personal-base-expense-data-amount{
+    margin-left: 10px;
+}
+
+
+.personal-base-expense-data-action{
+    float: right;
+    margin-top: 7px;
+}
+
+.personal-remove-expense-data-btn{
+    background-image: linear-gradient(to bottom right, rgb(227, 132, 7), rgb(242, 147, 24), rgba(252, 176, 77, 0.6));
+    border: 1px solid rgb(225, 130, 8);
+    border-radius: 5px;
+    color: beige;
+    font-family: 'Montserrat';
+    cursor: pointer;
+}
+
+.personal-remove-expense-data-btn-hide{
+    display: none;
+}
+
+.personal-base-truly-remove-expense-data-btn{
+    background-image: linear-gradient(to bottom right, rgb(183, 14, 5), rgb(219, 21, 11), rgba(240, 86, 78, 0.7));
+    font-family: 'Montserrat';
+    color: beige;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid rgb(185, 18, 9);
+}
+
+.personal-revert-remove-expense-data-btn{
+    background-image: linear-gradient(to bottom right, rgb(4, 104, 89), rgb(11, 151, 130), rgba(87, 236, 214, 0.7));
+    border: 1px solid rgb(47, 171, 152);
+    font-family: 'Montserrat';
+    color: beige;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.personal-base-remove-expense-form{
+    display: none;
+}
+
+.personal-base-remove-expense-prompt-label{
+    margin-top:-10px;
+    font-size: 10px;
+    font-family: 'Montserrat';
+    text-align: center;
+    color: beige;
+}
+
+.personal-base-remove-expense-form-show{
+    display: block;
+}
+
+.personal-base-expenditure-data-div{
+    border: 1px solid rgb(34, 247, 136);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: 'Montserrat';
+    color: beige;
+}
+
+.personal-base-expenditure-data-name{
+
+}
+
+.personal-base-expenditure-data-amount{
+
+}
+
+#expenses-graph-chart{
+    float: left;
+}
+
+#expenses-donut-chart{
+    float: right;
+}
+
+#expensesGraphChart{
+
+}
+
+#expensesDonutChart{
+    margin-left: 40px;
+}
+
+.personal-base-graph-chart-div{
+    height: 230px;
+    width: 460px;
+    background-image: linear-gradient(
+        to bottom right,
+        rgb(28, 181, 92),
+        rgb(45, 195, 107),
+        rgb(118, 249, 173)
+    );
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: beige;
+    font-family: 'Montserrat';
+    border-radius: 10px;
+    margin-top: 15px;
 }

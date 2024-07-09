@@ -41,7 +41,18 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'management',
     'personal_finances',
+    'ckeditor',
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'apuya_apuya@yahoo.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'dandan321321321@gmail.com'
+EMAIL_HOST_PASSWORD = 'hxcbtgizfjhbgzxh'
+# EMAIL_HOST_USER = 'autodidacticism001@gmail.com'
+# EMAIL_HOST_PASSWORD = 'abrpmrgsqvtupwqi'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

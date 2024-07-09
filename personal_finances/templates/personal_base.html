@@ -6,49 +6,109 @@
     <title>Oikonomos</title>
     <link rel="stylesheet" href="{% static 'personal_base.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <script src="{% static 'chart.umd.js' %}"></script>
+    <script src="{% static 'jquery-3.6.4.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 <body>
     {% if request.user.username == user.username and request.user.id == user.id %}
         <div class="personal-base-nav-bar-div">
             <ul class="personal-base-unordered-list">
                 <li class="personal-base-list">
-                    <a href="{% url 'homepage' %}">
+                    <a class='personal-base-nav-link' href="{% url 'homepage' %}">
                         Home
                     </a>
                 </li>
                 <li class="personal-base-list">
-                    <a href="{% url 'personal-homepage' request.user %}">
+                    <a class='personal-base-nav-link'
+                       href="{% url 'personal-homepage' request.user %}">
                         Personal Finances
+                    </a>
+                </li>
+                <li class="personal-base-list">
+                    <a class='personal-base-nav-link'
+                       href="{% url 'logout' %}">
+                        Logout
                     </a>
                 </li>
             </ul>
         </div>
         <div class="personal-base-block-content-div">
             {% block content %}
-                <div class="form-div">
-                    <form method="POST" enctype="multipart/form-data">
+                <div class="personal-base-header-title-div">
+                    <p class="personal-base-header-title">
+                        Oikonomos
+                    </p>
+                    <div class="personal-base-toggle-btns-container-div">
+                        <button class="personal-base-toggle-form-btn" id="toggle-form1">
+                            Add Fund Source
+                        </button>
+                        <button class="personal-base-toggle-form-btn" id="toggle-form2">
+                            Add Expense
+                        </button>
+                        <button class="personal-base-toggle-form-btn" id="toggle-form3">
+                            Transfer Fund
+                        </button>
+                    </div>
+                </div>
+                <div class="base-form-finance-div" id="base-finance-form1">
+                    <div class="base-form-finance-header-div">
+                        Fund Form
+                    </div>
+                    <form class="base-finance-form" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div>
-                            <input type="text" name="personal-fund-name">
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Fund Name *
+                            </div>
+                            <input class='base-finance-form-input'
+                                   type="text"
+                                   name="personal-fund-name"
+                                   required
+                            >
                         </div>
-                        <div>
-                            <input type="number" name="personal-fund-amount">
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Fund Amount *
+                            </div>
+                            <input class='base-finance-form-input'
+                                   type="number"
+                                   name="personal-fund-amount" required>
                         </div>
-                        <div>
-                            <input name='personal-fund-document' type="file" accept="image/png, image/jpeg, image/gif">
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Fund Document
+                            </div>
+                            <input class='base-finance-form-input'
+                                   name='personal-fund-document'
+                                   type="file" accept="image/png, image/jpeg, image/gif">
                         </div>
-                        <div>
-                            <button type="submit" name="add-personal-fund-btn">
+                        <div class="base-finance-form-btn-div">
+                            <button class='base-finance-form-btn'
+                                    id="base-finance-add-fund-btn"
+                                    type="submit"
+                                    name="add-personal-fund-btn">
                                 Add Fund
                             </button>
                         </div>
                     </form>
                 </div>
-                <div class="form-div">
-                    <form method="POST" enctype="multipart/form-data">
+                <div class="base-form-finance-div" id="base-finance-form2">
+                    <div class="base-form-finance-header-div">
+                        Expense Form
+                    </div>
+                    <form class="base-finance-form" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div>
-                            <select name="personal-expense-fund" id="expense-fund-select-field">
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Choose a Fund *
+                            </div>
+                            <select class='base-finance-form-input'
+                                    name="personal-expense-fund"
+                                    id="expense-fund-select-field"
+                                    required
+                            >
                                 {% for fund in personal_funds %}
                                     <option value="{{ fund.id }}">
                                         {{ fund.name }}
@@ -58,114 +118,763 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div>
-                            <input type="text" name="personal-expense-name">
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Expense Name *
+                            </div>
+                            <input class='base-finance-form-input'
+                                   type="text"
+                                   name="personal-expense-name"
+                                   required
+                            >
                         </div>
-                        <div>
-                            <input type="number" name="personal-expense-amount">
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Expense Amount *
+                            </div>
+                            <input class='base-finance-form-input'
+                                   type="number"
+                                   name="personal-expense-amount"
+                                   required
+                            >
                         </div>
-                        <div>
-                            <input class='income-statement-expense-input'
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Expense Document
+                            </div>
+                            <input class='base-finance-form-input'
                                    accept="image/png, image/jpeg, image/gif"
                                    type="file"
                                    name="personal-expense-document">
                         </div>
-                        <div>
-                            <button type="submit" name="add-personal-expense-btn">
+                        <div class="base-finance-form-btn-div">
+                            <button class='base-finance-form-btn'
+                                    id="base-finance-add-expense-btn"
+                                    type="submit"
+                                    name="add-personal-expense-btn">
                                 Add Expense
                             </button>
                         </div>
-
                     </form>
                 </div>
-                <div class="test">
-                    <div class="test-header">
-                        Received Funds
+                <div class="base-form-finance-div" id="base-finance-form3">
+                    <div class="base-form-finance-header-div">
+                        Transfer Form
                     </div>
-                    {% for fund in personal_received_funds %}
-                        <div class="test-block">
-                            <div>
-                                {{ fund.amount }}
+                    <form class="base-finance-form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Sender Fund *
                             </div>
-                            <div>
-                                {{ fund.name }}
-                            </div>
+                            <select class='base-finance-form-input'
+                                    name="fund-sender-id"
+                                    id="sender-fund-select-field"
+                                    required
+                            >
+                                {% for fund in personal_funds %}
+                                    <option value="{{ fund.id }}">
+                                        {{ fund.name }}
+                                    </option>
+                                {% empty %}
+                                    <option value="None">None</option>
+                                {% endfor %}
+                            </select>
                         </div>
-                    {% endfor %}
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Receiver Fund Source *
+                            </div>
+                            <select class='base-finance-form-input'
+                                    name="fund-receiver-id"
+                                    id="receiver-fund-select-field"
+                                    required
+                            >
+                                {% for fund in personal_funds %}
+                                    <option value="{{ fund.id }}">
+                                        {{ fund.name }}
+                                    </option>
+                                {% empty %}
+                                    <option value="None">None</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Transfer Mode *
+                            </div>
+                            <select class='base-finance-form-input'
+                                    name="fund-transfer-mode"
+                                    id="fund-transferred-select-field">
+                                {% for mode in fund_transfer_modes %}
+                                    <option value="{{ mode.id }}">{{ mode.name }}</option>
+                                {% empty %}
+                                    <option value="">None</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="base-finance-form-input-div">
+                            <div class="base-finance-form-label-div">
+                                Transferal Amount *
+                            </div>
+                            <input class='base-finance-form-input'
+                                   type="number"
+                                   name="fund-transferred"
+                                   required
+                            >
+                        </div>
+                        <div class="base-finance-form-btn-div">
+                            <button class='base-finance-form-btn'
+                                    id="base-finance-transfer-fund-btn"
+                                    type="submit"
+                                    name="transfer-fund-btn">
+                                Transfer Fund
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div class="test">
-                    <div class="test-header">
-                        Funds
+                <div class="base-finance-net-balance-div">
+                    <div class="base-finance-net-balance-label-div">
+                        Net Worth
                     </div>
-                    {% for fund in personal_funds %}
-                        <div class="test-block">
-                            <div>
-                                {{ fund.name }}
-                            </div>
-                            <div>
-                                {{ fund.amount }}
-                            </div>
-                            <div>
-                                {{ fund.date }}
-                            </div>
-                        </div>
-                    {% empty %}
-                        <div>
-                            No Available Funds
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="test">
-                    <div class="test-header">
-                        Expenses
-                    </div>
-                    {% for expense in personal_expenses %}
-                        <div class="test-block">
-                            <div>
-                                {{ expense.name }}
-                            </div>
-                            <div>
-                                {{ expense.amount }}
-                            </div>
-                        </div>
-
-                    {% empty %}
-                        <div>
-                            No Expenses
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="test">
-                    <div class="test-header">
-                        Fund Expenditures
-                    </div>
-                    {% for expense in personal_expense_funds %}
-                        <div class="test-block">
-                            <div>
-                                {{ expense.name }}
-                            </div>
-                            <div>
-                                {{ expense.amount }}
-                            </div>
-                        </div>
-                    {% empty %}
-                        <div>
-                            No expenditures
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="test">
-                    <div class="test-header">
-                        Net Balance
-                    </div>
-                    <div class="test-block">
+                    <div class="base-finance-net-balance-amount-div">
                         {{ personal_net_worth.amount }}
                     </div>
                 </div>
+                <div class="personal-base-finances-toggle-finances-btn-container-div">
+                    <button class="personal-base-toggle-finance-mode-btn" id="toggle-finance-mode-btn1">
+                        Funds
+                    </button>
+                    <button class="personal-base-toggle-finance-mode-btn" id="toggle-finance-mode-btn2">
+                        Expenses
+                    </button>
+                </div>
+                <div class="personal-base-finances-panel-div">
+                    <div class="personal-base-finance-mode-container-div">
+                        <div class="personal-base-finance-mode-div" id='finance-mode1'>
+                            <div class="personal-base-finances-block-element" id="personal-base-received-funds">
+                                <div class="personal-base-finances-panel-title-header-div">
+                                    Received Funds
+                                </div>
+                                <div class="personal-base-finances-data-container-div">
+                                    {% for fund in personal_received_funds %}
+                                        <div class="personal-base-finances-data-element-div">
+                                            <div>
+                                                {{ fund.amount }}
+                                            </div>
+                                            <div>
+                                                {{ fund.name }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="personal-base-finances-block-element" id="personal-base-fund">
+                                <div class="personal-base-funds-container-title-header-div" >
+                                    Funds
+                                </div>
+                                <div class="personal-base-fund-data-container-div">
+                                    {% for fund in personal_funds %}
+                                        <div class="personal-base-fund-data-div">
+                                            <div class="personal-base-fund-details-div">
+                                                <div class="personal-base-fund-name-toggle-div">
+                                                    <div class="personal-base-fund-name-div">
+                                                        {{ fund.name }}
+                                                    </div>
+                                                    <form class="personal-base-toggle-add-fund-form">
+                                                        <button class="personal-base-toggle-add-fund-form-btn"
+                                                                id='toggle-add-fund-form-btn{{ fund.id }}'
+                                                                type="button">+
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <div class="personal-base-fund-amount-div" id="fund-amount-amount{{ fund.id }}">
+                                                    {{ fund.amount }}
+                                                </div>
+                                                <div class="personal-base-fund-forms-div" >
+                                                    <form class="personal-base-add-fund-form"
+                                                          id="fund-amount-input{{ fund.id }}"
+                                                          method="POST">
+                                                        {% csrf_token %}
+                                                        <input name='fund-id' type="hidden" value="{{ fund.id }}">
+                                                        <input class='personal-base-add-fund-input'
+                                                               name='fund-amount-added' type="number">
+                                                        <button class='personal-base-add-fund-btn'
+                                                                name='add-fund-amount-btn' type="submit">
+                                                            Add Fund
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="personal-base-remove-fund-data-func-div">
+                                                <button id="toggle-remove-btn{{ fund.id }}"
+                                                        class='personal-base-remove-fund-data-btn'
+                                                        type="button"
+                                                >
+                                                    Remove
+                                                </button>
+                                                <form class="personal-base-remove-fund-form"
+                                                      id='remove-fund-form{{ fund.id }}'
+                                                      method='POST'
+                                                      action="{% url 'remove-fund' fund.id request.user %}">
+                                                    {% csrf_token %}
+                                                    <div class="personal-base-remove-fund-prompt-label">
+                                                        Are you sure?
+                                                    </div>
+                                                    <button class='personal-base-true-remove-fund-data-btn' type="submit">
+                                                        Yes
+                                                    </button>
+                                                    <button id='revert-remove-fund-form{{ fund.id }}'
+                                                            class='personal-base-cancel-remove-fund-data-btn' type="button">
+                                                        No
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    {% empty %}
+                                        <div>
+                                            No Available Funds
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="personal-base-graph-chart-div" id="funds-graph-chart">
+                                <canvas id="fundsGraphChart" width="400" height="270"></canvas>
+                            </div>
+                            <div class="personal-base-graph-chart-div" id="funds-donut-chart">
+                                <canvas id="fundsDonutChart" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                        <div class="personal-base-finance-mode-div" id="finance-mode2">
+                            <div class="personal-base-finance-mode-expense" id="personal-base-expenses">
+                                <div class="personal-base-finance-mode-expense-header-title">
+                                    Expenses
+                                </div>
+                                <div class="personal-base-expense-data-container-div">
+                                    {% for expense in personal_expenses %}
+                                        <div class="personal-base-expense-data">
+                                            <div class="personal-base-expense-data-details">
+                                                <div class="personal-base-expense-data-name">
+                                                    {{ expense.name }}
+                                                </div>
+                                                <div class="personal-base-expense-data-amount">
+                                                    {{ expense.amount }}
+                                                </div>
+                                            </div>
+                                            <div class="personal-base-expense-data-action">
+                                                <button id='toggle-remove-expense-form-btn{{ expense.id }}'
+                                                        class='personal-remove-expense-data-btn' type="button">
+                                                    Remove
+                                                </button>
+                                                <form id='remove-expense-form{{ expense.id }}'
+                                                      class="personal-base-remove-expense-form"
+                                                      method='POST'
+                                                      action="{% url 'remove-expense' expense.id request.user %}">
+                                                    {% csrf_token %}
+                                                    <div class="personal-base-remove-expense-prompt-label">
+                                                        Are you sure?
+                                                    </div>
+                                                    <button class='personal-base-truly-remove-expense-data-btn' type="submit">
+                                                        Yes
+                                                    </button>
+                                                    <button id="revert-remove-expense-form{{ expense.id }}"
+                                                            class='personal-revert-remove-expense-data-btn' type="button">
+                                                        No
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    {% empty %}
+                                        <div>
+                                            No Expenses
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="personal-base-finance-mode-expense" id="personal-base-fund-expenditure">
+                                <div class="personal-base-finance-mode-expense-header-title">
+                                    Fund Expenditures
+                                </div>
+                                <div class="personal-base-expense-data-container-div">
+                                    {% for expense in personal_expense_funds %}
+                                        <div class="personal-base-expenditure-data-div">
+                                            <div class="personal-base-expenditure-data-name">
+                                                {{ expense.name }}
+                                            </div>
+                                            <div class="personal-base-expenditure-data-amount">
+                                                {{ expense.amount }}
+                                            </div>
+                                        </div>
+                                    {% empty %}
+                                        <div>
+                                            No expenditures
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="personal-base-graph-chart-div" id="expenses-graph-chart">
+                                <canvas id="expensesGraphChart" width="400" height="300"></canvas>
+                            </div>
+                            <div class="personal-base-graph-chart-div" id="expenses-donut-chart">
+                                <canvas id="expensesDonutChart" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--               {% for category, expenses in categorized_expense.items %}-->
+<!--                    <div>-->
+<!--                        {{ category }}-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        {% for expense in expenses %}-->
+<!--                            <div>-->
+<!--                                - {{ expense }}-->
+<!--                            </div>-->
+<!--                        {% endfor %}-->
+<!--                    </div>-->
+<!--                {% endfor %}-->
+<!--                {{ vocabulary }}-->
+<!--                {% for name in clean_expense_name_list %}-->
+<!--                    <div>-->
+<!--                        {{ name }}-->
+<!--                    </div>-->
+<!--                {% endfor %}-->
+
+<!--                {% for name, expense in expenses_dict.items %}-->
+<!--                    <div>-->
+<!--                        {{ name }}-->
+<!--                    </div>-->
+<!--                {% endfor %}-->
+<!--                <a href="{% url 'create-new-worth-flow' request.user.username %}">Create Net Worth</a>-->
             {% endblock %}
+
         </div>
     {% else %}
         You Are not Authorized to Access this Page
     {% endif %}
+    <script>
+        const toggleFormBtns = document.querySelectorAll('.personal-base-toggle-form-btn');
+
+        toggleFormBtns.forEach(button => {
+            button.addEventListener('click', () => {
+                const formId = button.id.replace('toggle-form', '');
+                const financeForm = document.getElementById(`base-finance-form${formId}`);
+
+                financeForm.classList.toggle('base-form-finance-div-show');
+
+                toggleFormBtns.forEach(otherButton => {
+                    otherButton.addEventListener('click', ()=> {
+                        const otherFinanceForm = document.getElementById(`base-finance-form${formId}`);
+
+                        if (otherButton !== button) {
+                            otherFinanceForm.classList.remove('base-form-finance-div-show');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+        // personal-base-toggle-add-fund-form-btn
+        // toggle-add-fund-form-btn{{ fund.id }}
+        // fund-amount-input{{ fund.id }}
+        document.addEventListener('DOMContentLoaded', ()=> {
+            const toggleAddFundBtns = document.querySelectorAll('.personal-base-toggle-add-fund-form-btn');
+
+            toggleAddFundBtns.forEach(button => {
+                button.addEventListener('click', () => {
+                    const formId = button.id.replace('toggle-add-fund-form-btn', '');
+                    const addFundForm = document.getElementById(`fund-amount-input${formId}`);
+                    const fundAmount = document.getElementById(`fund-amount-amount${formId}`);
+
+                    // Toggle the clicked button's elements
+                    fundAmount.classList.toggle('personal-base-fund-amount-hide');
+                    addFundForm.classList.toggle('personal-base-add-fund-form-show');
+
+                    button.innerHTML = button.innerHTML === '+' ? '-' : '+'
+
+                    // Ensure other buttons' elements are reverted to their default state
+                    toggleAddFundBtns.forEach(otherBtn => {
+                        if (otherBtn !== button) {
+                            const id = otherBtn.id.replace('toggle-add-fund-form-btn', '');
+                            const otherFundForm = document.getElementById(`fund-amount-input${id}`);
+                            const otherFundAmount = document.getElementById(`fund-amount-amount${id}`);
+
+                            otherFundForm.classList.remove('personal-base-add-fund-form-show');
+                            otherFundAmount.classList.remove('personal-base-fund-amount-hide');
+                            otherBtn.innerHTML = '+';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+        function elementHeightRelativeToScreenBottom(element) {
+            let screenHeight = window.innerHeight;
+
+            let rectangle = element.getBoundingClientRect();
+            let distanceToBottom = screenHeight - rectangle.top;
+            let distanceToBottomVh = (distanceToBottom / screenHeight ) * 100
+
+            return distanceToBottom;
+        }
+
+        const financePanel = document.querySelector('.personal-base-finances-panel-div');
+        const distanceToBottom = elementHeightRelativeToScreenBottom(financePanel);
+        console.log(distanceToBottom);
+    </script>
+    <script>
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        // Function to get a cookie
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const financeModes = document.querySelectorAll('.personal-base-finance-mode-div');
+            const toggleFinanceModeBtns = document.querySelectorAll('.personal-base-toggle-finance-mode-btn');
+
+            // Check for the stored active finance mode in cookies
+            const activeModeId = getCookie('activeFinanceMode');
+            if (activeModeId) {
+                const activeMode = document.getElementById(`finance-mode${activeModeId}`);
+                if (activeMode) {
+                    activeMode.classList.add('finance-mode-show');
+                }
+            } else {
+                // Default to the first finance mode
+                financeModes[0].classList.add('finance-mode-show');
+            }
+
+            toggleFinanceModeBtns.forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.id.replace('toggle-finance-mode-btn', '');
+                    const financeMode = document.getElementById(`finance-mode${id}`);
+
+                    // Show the clicked finance mode
+                    financeMode.classList.add('finance-mode-show');
+
+                    // Hide other finance modes and update the cookie
+                    toggleFinanceModeBtns.forEach(otherBtn => {
+                        const otherId = otherBtn.id.replace('toggle-finance-mode-btn', '');
+                        const otherFinanceMode = document.getElementById(`finance-mode${otherId}`);
+
+                        if (otherBtn !== button) {
+                            otherFinanceMode.classList.remove('finance-mode-show');
+                        }
+                    });
+
+                    // Store the active finance mode in a cookie
+                    setCookie('activeFinanceMode', id, 7);
+                });
+            });
+        });
+    </script>
+    <script>
+
+        var fund_flow_label = {{ fund_flow_label|safe }};
+        var fund_flow_net_worth = {{ fund_flow_net_worth|safe }};
+
+        var fundGraphChart = document.getElementById('fundsGraphChart').getContext('2d');
+
+        var data_fund_flow = {
+          labels: fund_flow_label,
+          datasets: [{
+            label: 'Fund Flow',
+            data: fund_flow_net_worth,
+            backgroundColor: 'rgb(248, 185, 35)',
+            borderColor: 'rgb(245, 146, 16)',
+            borderWidth: 1
+          }]
+        };
+
+        var myBarChartFiltered = new Chart(fundGraphChart, {
+          type: 'line',
+          data: data_fund_flow,
+          options: {
+            scales: {
+              x: {
+                grid: {
+                  drawOnChartArea: false
+                },
+                ticks: {
+                  color: 'rgb(240, 240, 240)', // Change the font color of x-axis labels here
+                  display: false,
+                }
+              },
+              y: {
+                beginAtZero: true,
+                grid: {
+                  drawOnChartArea: false
+                },
+                ticks: {
+                  color: 'rgb(240, 240, 240)' // Change the font color of y-axis labels here
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: 'rgb(240, 240, 240)' // Change the font color of the legend labels here
+                }
+              }
+            }
+          }
+        });
+
+        var product_name_filtered = {{ expenses_date|safe }};
+        var summed_sold_product_filtered = {{ expenses_amount|safe }};
+
+        var ctx_filtered = document.getElementById('expensesGraphChart').getContext('2d');
+
+        var data_filtered = {
+          labels: product_name_filtered,
+          datasets: [{
+            label: 'Expenses',
+            data: summed_sold_product_filtered,
+            backgroundColor: 'rgb(248, 185, 35)',
+            borderColor: 'rgb(245, 146, 16)',
+            borderWidth: 1
+          }]
+        };
+
+        var myBarChartFiltered = new Chart(ctx_filtered, {
+          type: 'line',
+          data: data_filtered,
+          options: {
+            scales: {
+              x: {
+                grid: {
+                  drawOnChartArea: false
+                },
+                ticks: {
+                  color: 'rgb(240, 240, 240)' // Change the font color of x-axis labels here
+                }
+              },
+              y: {
+                beginAtZero: true,
+                grid: {
+                  drawOnChartArea: false
+                },
+                ticks: {
+                  color: 'rgb(240, 240, 240)' // Change the font color of y-axis labels here
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: 'rgb(240, 240, 240)' // Change the font color of the legend labels here
+                }
+              }
+            }
+          }
+        });
+
+        // fund_increase_label
+        // fund_increase_amount
+
+        var labels = {{ expense_donut_label|safe }};
+        var data = {{ expense_donut_percentage|safe }};
+
+        var ctx = document.getElementById('expensesDonutChart').getContext('2d');
+
+        var myDonutChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Expenses by Category',
+                    data: data,
+                    backgroundColor: [
+                        'rgb(183, 66, 39)',
+                        'rgb(39, 183, 147)',
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(8, 87, 50)',
+                        'rgb(75, 192, 192)',
+                        'rgb(153, 102, 255)',
+                        'rgb(104, 139, 100)',
+                        'rgb(190, 127, 17)',
+                        'rgb(98, 121, 111)',
+                        'rgb(67, 110, 119)',
+                        // Add more colors if you have more categories
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.raw !== null) {
+                                    label += context.raw;
+                                }
+                                return label + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // fund_increase_label
+        // fund_increase_amount
+
+        var fund_increase_label = {{ fund_increase_label|safe }};
+        var fund_increase_amount = {{ fund_increase_amount|safe }};
+
+        var fundsDonutChartElement = document.getElementById('fundsDonutChart').getContext('2d');
+
+        var FundsDonutChart = new Chart(fundsDonutChartElement, {
+            type: 'doughnut',
+            data: {
+                labels: fund_increase_label,
+                datasets: [{
+                    label: 'Fund Increase',
+                    data: fund_increase_amount,
+                    backgroundColor: [
+                        'rgb(183, 66, 39)',
+                        'rgb(39, 183, 147)',
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(8, 87, 50)',
+                        'rgb(75, 192, 192)',
+                        'rgb(153, 102, 255)',
+                        'rgb(104, 139, 100)',
+                        'rgb(190, 127, 17)',
+                        'rgb(98, 121, 111)',
+                        'rgb(67, 110, 119)',
+                        // Add more colors if you have more categories
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.raw !== null) {
+                                    label += context.raw;
+                                }
+                                return label + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+    <script>
+        document.getElementById('sender-fund-select-field').addEventListener('change', ()=> {
+            var selectedFund = event.target.value;
+
+            console.log(selectedFund);
+
+            $.ajax({
+                url: '/account/filter-receiver-funds/',
+                method: 'GET',
+                data: {fundSenderId: selectedFund},
+
+                success: function(data) {
+                    var receiverDropdown = $('#receiver-fund-select-field');
+                    receiverDropdown.empty();
+                    $.each(data, function(index, fund) {
+                       receiverDropdown.append('<option value="' + fund.id + '">' + fund.name + '</option>')
+                    });
+                },
+                error: function(error) {
+                    console.error('Error fetching receiving funds: ', error);
+                }
+            });
+        });
+    </script>
+    <script>
+        const toggleRemoveFundBtns = document.querySelectorAll('.personal-base-remove-fund-data-btn');
+
+        toggleRemoveFundBtns.forEach(button => {
+            button.addEventListener('click', ()=> {
+                const id = button.id.replace('toggle-remove-btn', '');
+                const removeFundForm = document.getElementById(`remove-fund-form${id}`);
+
+                button.classList.add('personal-base-remove-fund-data-btn-hide');
+                removeFundForm.classList.add('personal-base-remove-fund-form-show');
+            });
+        });
+
+        const revertRemoveFundFormBtns = document.querySelectorAll('.personal-base-cancel-remove-fund-data-btn');
+
+        revertRemoveFundFormBtns.forEach(revertBtn => {
+            revertBtn.addEventListener('click', ()=> {
+                const formId = revertBtn.id.replace('revert-remove-fund-form', '');
+                const removeFundFormRevert = document.getElementById(`remove-fund-form${formId}`);
+                const toggleRemoveFundBtn = document.getElementById(`toggle-remove-btn${formId}`);
+
+                removeFundFormRevert.classList.remove('personal-base-remove-fund-form-show');
+                toggleRemoveFundBtn.classList.remove('personal-base-remove-fund-data-btn-hide');
+            });
+        });
+    </script>
+    <script>
+        const toggleRemoveExpenseFormBtns = document.querySelectorAll('.personal-remove-expense-data-btn');
+
+        toggleRemoveExpenseFormBtns.forEach(button => {
+            button.addEventListener('click', ()=> {
+                const id = button.id.replace('toggle-remove-expense-form-btn', '');
+                const removeExpenseForm = document.getElementById(`remove-expense-form${id}`);
+
+                removeExpenseForm.classList.add('personal-base-remove-expense-form-show');
+                button.classList.add('personal-remove-expense-data-btn-hide');
+            });
+        });
+
+        const revertRemoveExpenseFormBtns = document.querySelectorAll('.personal-revert-remove-expense-data-btn');
+
+        revertRemoveExpenseFormBtns.forEach(revertBtn => {
+            revertBtn.addEventListener('click', ()=> {
+                const formId = revertBtn.id.replace('revert-remove-expense-form', '');
+                const revertForm = document.getElementById(`remove-expense-form${formId}`);
+                const toggleRemoveExpenseFormBtn = document.getElementById(`toggle-remove-expense-form-btn${formId}`);
+
+                revertForm.classList.remove('personal-base-remove-expense-form-show');
+                toggleRemoveExpenseFormBtn.classList.remove('personal-remove-expense-data-btn-hide');
+            });
+        });
+    </script>
 </body>
 </html>

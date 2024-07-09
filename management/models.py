@@ -8,6 +8,7 @@ class FundReceived(models.Model):
     date = models.DateField()
     date_time = models.DateTimeField()
     document = models.ImageField(null=True, blank=True, upload_to='funds/')
+    removed = models.BooleanField(default=False)
 
 
 class Fund(models.Model):
@@ -28,6 +29,7 @@ class Expense(models.Model):
     date_time = models.DateTimeField()
     fund = models.ForeignKey(Fund, on_delete=models.PROTECT)
     document = models.ImageField(null=True, blank=True, upload_to='expenses/')
+    removed = models.BooleanField(default=False)
 
 
 class FundExpenditure(models.Model):
@@ -36,7 +38,31 @@ class FundExpenditure(models.Model):
     expense = models.ForeignKey(Expense, on_delete=models.PROTECT)
     date = models.DateField()
     date_time = models.DateTimeField()
+    removed = models.BooleanField(default=False)
 
 
 class NetWorth(models.Model):
     amount = models.IntegerField(default=0)
+
+
+class PrivacyPolicy(models.Model):
+    name = models.CharField(max_length=100)
+    statement = models.TextField()
+    date = models.DateField()
+    date_time = models.DateTimeField()
+    date_updated = models.DateField()
+    date_time_updated = models.DateTimeField()
+
+
+class TermsOfService(models.Model):
+    name = models.CharField(max_length=100)
+    statement = models.TextField()
+    date_updated = models.DateField()
+    date_time_updated = models.DateTimeField()
+
+
+class About(models.Model):
+    name = models.CharField(max_length=100)
+    statement = models.TextField()
+    date = models.DateField()
+    date_time = models.DateTimeField()

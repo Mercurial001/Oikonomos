@@ -2,99 +2,124 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.utils import timezone
 from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .decorators import authenticated_user
+from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from economics import settings
 
 
 def index(request):
-    funds = Fund.objects.all()
-    expenses = Expense.objects.all()
-    received_funds = FundReceived.objects.all()
-    fund_expenditures = FundExpenditure.objects.all()
-    net_balance, net_balance_created = NetWorth.objects.get_or_create(id=1)
-    net_balance.save()
-
-    if request.method == 'POST':
-        if 'add-fund-btn' in request.POST:
-            fund_name = request.POST.get('fund-name')
-            fund_amount = request.POST.get('fund-amount')
-            fund_document = request.FILES.get('fund-document')
-
-            balance, balance_created = NetWorth.objects.get_or_create(id=1)
-            balance.amount += float(fund_amount)
-            balance.save()
-
-            fund, created = Fund.objects.get_or_create(
-                name=fund_name,
-                amount=float(fund_amount),
-                date=timezone.now().date(),
-                date_time=timezone.now(),
-            )
-            fund.save()
-
-            fund_received, fund_received_created = FundReceived.objects.get_or_create(
-                name=fund_name,
-                amount=float(fund_amount),
-                date=timezone.now().date(),
-                date_time=timezone.now(),
-                document=fund_document,
-            )
-
-            fund_received.save()
-
-            http_referrer = request.META.get('HTTP_REFERER')
-
-            if http_referrer:
-                return HttpResponseRedirect(http_referrer)
-            else:
-                return redirect('homepage')
-
-        elif 'add-expense-btn' in request.POST:
-            expense_fund_id = request.POST.get('expense-fund')
-            expense_name = request.POST.get('expense-name')
-            expense_amount = request.POST.get('expense-amount')
-            expense_document = request.FILES.get('expense-document')
-
-            balance, balance_created = NetWorth.objects.get_or_create(id=1)
-            balance.amount -= float(expense_amount)
-            balance.save()
-
-            expense_fund = Fund.objects.get(id=expense_fund_id)
-            expense_fund.amount -= float(expense_amount)
-            expense_fund.date = timezone.now().date()
-            expense_fund.date_time = timezone.now()
-            expense_fund.save()
-
-            expense, created_expense = Expense.objects.get_or_create(
-                personnel=request.user,
-                name=expense_name,
-                amount=float(expense_amount),
-                date=timezone.now().date(),
-                date_time=timezone.now(),
-                document=expense_document,
-                fund=expense_fund,
-            )
-
-            expense.save()
-
-            fund_expenditure, fund_expenditure_created = FundExpenditure.objects.get_or_create(
-                name=expense_name,
-                amount=expense_fund.amount,
-                expense=expense,
-                date=timezone.now().date(),
-                date_time=timezone.now(),
-            )
-
-            fund_expenditure.save()
-
-            http_referrer = request.META.get('HTTP_REFERER')
-            if http_referrer:
-                return HttpResponseRedirect(http_referrer)
-            else:
-                return redirect('homepage')
 
     return render(request, 'base.html', {
-        'funds': funds,
-        'expenses': expenses,
-        'received_funds': received_funds,
-        'fund_expenditures': fund_expenditures,
-        'net_balance': net_balance,
+
+    })
+
+
+@authenticated_user
+def authentication(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('personal-homepage', username=username)
+        else:
+            messages.error(request, "Invalid Form Data")
+
+    return render(request, 'login.html', {
+
+    })
+
+
+def privacy_policy(request):
+    privacy_policy_obj = PrivacyPolicy.objects.first()
+    return render(request, 'privacy_policy.html', {
+        'privacy_policy_obj': privacy_policy_obj,
+    })
+
+
+def terms_of_use(request):
+    terms_statement = TermsOfService.objects.first()
+    return render(request, 'terms_of_use.html', {
+        'terms_statement': terms_statement,
+    })
+
+
+def about_us(request):
+    about_statement = About.objects.first()
+    return render(request, 'about.html', {
+        'about_statement': about_statement,
+    })
+
+
+def contact_us_page(request):
+    if request.method == 'POST':
+        message = request.POST.get('contact-message')
+        email_sender = request.POST.get('sender-email')
+        email_authenticated = request.POST.get('sender-email-authenticated')
+        subject = request.POST.get('subject')
+
+        if request.user.is_authenticated:
+            email = email_authenticated
+        else:
+            email = email_sender
+
+        html_message = render_to_string('email.html', {
+            'email': email,
+            'message': message,
+            'subject': subject
+        })
+
+        send_mail(
+            subject,
+            message,
+            from_email=email,
+            recipient_list=[settings.EMAIL_HOST_USER],
+            html_message=html_message,
+        )
+
+        return redirect('contact-us')
+
+    return render(request, 'contact_us.html', {
+
+    })
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('homepage')
+
+
+def registration(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        email = request.POST.get('email')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username Already Exists')
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, 'Email Already Exists')
+        else:
+            if password1 == password2:
+                hashed_password = make_password(password1)
+                User.objects.create(
+                    username=username,
+                    password=hashed_password,
+                    email=email
+                )
+                messages.success(request, f'Account {username} successfully created!')
+                return redirect('login')
+            else:
+                messages.error(request, 'Passwords not the same')
+
+    return render(request, 'registration.html', {
+
     })
