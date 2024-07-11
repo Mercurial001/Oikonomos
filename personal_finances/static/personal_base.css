@@ -1,14 +1,66 @@
 body{
     margin: 0;
 /*    background-color: rgb(40, 40, 40);*/
+
+}
+
+.personal-base-toggle-side-bar-cover{
+    display: none;
+    transition: 0.5s all ease-in-out;
+}
+
+.personal-base-toggle-side-bar-cover-toggle{
+    margin-top: -10px;
+    transition: 0.5s all ease-in-out;
+    opacity: 0.5;
+    position: absolute;
+    background-color: rgb(71, 79, 72);
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+    display: block;
 }
 
 .personal-base-nav-bar-div{
     width:20%;
     float: left;
     position: fixed;
-    background-image: linear-gradient(to bottom right, rgb(5, 104, 48), rgb(17, 207, 99), rgb(128, 247, 179));
+    background-image: linear-gradient(to bottom right,
+        rgb(5, 104, 48),
+        rgb(17, 207, 99),
+        rgb(128, 247, 179)
+    );
     height: 100vh;
+    z-index: 2;
+    transition: 0.5s all ease-in-out;
+    left: 0px;
+}
+
+.personal-base-nav-bar-div-toggle{
+    width:20%;
+    float: left;
+    position: fixed;
+    background-image: linear-gradient(to bottom right,
+        rgb(5, 104, 48),
+        rgb(17, 207, 99),
+        rgb(128, 247, 179)
+    );
+    height: 100vh;
+    z-index: 2;
+    left: 0px;
+    transition: 0.5s all ease-in-out;
+}
+
+.personal-base-toggle-side-bar-nav{
+    font-size: 25px;
+    position: absolute;
+    background: none;
+    z-index: 1;
+    top: 10px;
+    left: 10px;
+    border: none;
+    cursor: pointer;
+    color: green;
 }
 
 .personal-base-unordered-list{
@@ -44,6 +96,7 @@ body{
     border-radius: 10px;
     padding-bottom: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    /*transition: 1s all ease-in-out;*/
 }
 
 .base-finance-net-balance-label-div{
@@ -90,23 +143,39 @@ body{
 }
 
 #toggle-form1{
-    background-image: linear-gradient(to bottom right,rgb(4, 202, 89), rgb(54, 214, 123), rgb(61, 244, 141));
+    background-image: linear-gradient(to bottom right,
+        rgb(4, 202, 89),
+        rgb(54, 214, 123),
+        rgb(61, 244, 141)
+    );
     border: 1px solid rgb(14, 205, 97);
 }
 
 #toggle-form2{
-    background-image: linear-gradient(to bottom right, rgb(241, 192, 29), rgb(249, 177, 96));
+    background-image: linear-gradient(to bottom right,
+        rgb(241, 192, 29),
+        rgb(249, 177, 96)
+    );
     border: 1px solid rgb(249, 202, 49);
 }
 
 #toggle-form3{
-    background-image: linear-gradient(to bottom right, rgb(4, 104, 89), rgb(11, 151, 130), rgba(87, 236, 214, 0.7));
+    background-image: linear-gradient(to bottom right,
+        rgb(4, 104, 89),
+        rgb(11, 151, 130),
+        rgba(87, 236, 214, 0.7)
+    );
     border: 1px solid rgb(47, 171, 152);
 }
 
 
 .base-form-finance-header-div{
-    background-image: linear-gradient(to bottom right, rgb(9, 170, 79), rgb(18, 204, 99), rgb(33, 240, 122), rgb(67, 235, 23));
+    background-image: linear-gradient(to bottom right,
+        rgb(9, 170, 79),
+        rgb(18, 204, 99),
+        rgb(33, 240, 122),
+        rgb(67, 235, 23)
+    );
     text-align: left;
     font-family: 'Montserrat';
     font-weight: 800;
@@ -121,7 +190,10 @@ body{
 
 
 .base-form-finance-div{
-    background-image: linear-gradient(to bottom right, rgb(236, 252, 243), rgb(246, 252, 249));
+    background-image: linear-gradient(to bottom right,
+        rgb(236, 252, 243),
+        rgb(246, 252, 249)
+    );
     position: absolute;
     top: 55%;
     left: 60%;
@@ -175,17 +247,28 @@ body{
 }
 
 #base-finance-add-expense-btn{
-    background-image: linear-gradient(to bottom right, rgb(241, 192, 29), rgb(249, 177, 96));
+    background-image: linear-gradient(to bottom right,
+        rgb(241, 192, 29),
+        rgb(249, 177, 96)
+    );
     border: 1px solid rgb(249, 202, 49);
 }
 
 #base-finance-add-fund-btn{
-    background-image: linear-gradient(to bottom right,rgb(4, 202, 89), rgb(54, 214, 123), rgb(61, 244, 141));
+    background-image: linear-gradient(to bottom right,
+        rgb(4, 202, 89),
+        rgb(54, 214, 123),
+        rgb(61, 244, 141)
+    );
     border: 1px solid rgb(14, 205, 97);
 }
 
 #base-finance-transfer-fund-btn{
-    background-image: linear-gradient(to bottom right, rgb(4, 104, 89), rgb(11, 151, 130), rgba(87, 236, 214, 0.7));
+    background-image: linear-gradient(to bottom right,
+        rgb(4, 104, 89),
+        rgb(11, 151, 130),
+        rgba(87, 236, 214, 0.7)
+    );
     border: 1px solid rgb(47, 171, 152);
 }
 
@@ -198,7 +281,8 @@ body{
     border-top-right-radius: 10px;
     border: 1px solid rgb(5, 182, 11);
     overflow: hidden;
-    height: 76.22vh;
+    min-height: 76.22vh;
+
 }
 
 .personal-base-finances-toggle-finances-btn-container-div{
@@ -224,7 +308,10 @@ body{
 }
 
 #toggle-finance-mode-btn2{
-    background-image: linear-gradient(to bottom right, rgb(241, 192, 29), rgb(249, 177, 96));
+    background-image: linear-gradient(to bottom right,
+        rgb(241, 192, 29),
+        rgb(249, 177, 96)
+    );
     border: 1px solid rgb(230, 154, 10);
 }
 
@@ -366,6 +453,7 @@ body{
 }
 
 .personal-base-remove-fund-data-func-div{
+
     float: right;
 }
 
@@ -415,7 +503,11 @@ body{
 
 .personal-base-remove-fund-data-btn{
     margin-top: 10px;
-    background-image: linear-gradient(to bottom right, rgb(227, 132, 7), rgb(242, 147, 24), rgba(252, 176, 77, 0.6));
+    background-image: linear-gradient(to bottom right,
+        rgb(227, 132, 7),
+        rgb(242, 147, 24),
+        rgba(252, 176, 77, 0.6)
+    );
     border: 1px solid rgb(225, 130, 8);
     border-radius: 5px;
     font-family: 'Montserrat';
@@ -425,7 +517,11 @@ body{
 }
 
 .personal-base-true-remove-fund-data-btn{
-    background-image: linear-gradient(to bottom right, rgb(183, 14, 5), rgb(219, 21, 11), rgba(240, 86, 78, 0.7));
+    background-image: linear-gradient(to bottom right,
+        rgb(183, 14, 5),
+        rgb(219, 21, 11),
+        rgba(240, 86, 78, 0.7)
+    );
     font-family: 'Montserrat';
     color: beige;
     border-radius: 5px;
@@ -434,7 +530,11 @@ body{
 }
 
 .personal-base-cancel-remove-fund-data-btn{
-    background-image: linear-gradient(to bottom right, rgb(4, 104, 89), rgb(11, 151, 130), rgba(87, 236, 214, 0.7));
+    background-image: linear-gradient(to bottom right,
+        rgb(4, 104, 89),
+        rgb(11, 151, 130),
+        rgba(87, 236, 214, 0.7)
+    );
     border: 1px solid rgb(47, 171, 152);
     font-family: 'Montserrat';
     color: beige;
@@ -462,7 +562,9 @@ body{
     margin-left: 40px;
 }
 
+*/
 /*Expenses*/
+
 
 .personal-base-expenses-container-div{
     display: none;
@@ -535,7 +637,11 @@ body{
 }
 
 .personal-remove-expense-data-btn{
-    background-image: linear-gradient(to bottom right, rgb(227, 132, 7), rgb(242, 147, 24), rgba(252, 176, 77, 0.6));
+    background-image: linear-gradient(to bottom right,
+        rgb(227, 132, 7),
+        rgb(242, 147, 24),
+        rgba(252, 176, 77, 0.6)
+    );
     border: 1px solid rgb(225, 130, 8);
     border-radius: 5px;
     color: beige;
@@ -548,7 +654,11 @@ body{
 }
 
 .personal-base-truly-remove-expense-data-btn{
-    background-image: linear-gradient(to bottom right, rgb(183, 14, 5), rgb(219, 21, 11), rgba(240, 86, 78, 0.7));
+    background-image: linear-gradient(to bottom right,
+        rgb(183, 14, 5),
+        rgb(219, 21, 11),
+        rgba(240, 86, 78, 0.7)
+    );
     font-family: 'Montserrat';
     color: beige;
     border-radius: 5px;
@@ -557,7 +667,11 @@ body{
 }
 
 .personal-revert-remove-expense-data-btn{
-    background-image: linear-gradient(to bottom right, rgb(4, 104, 89), rgb(11, 151, 130), rgba(87, 236, 214, 0.7));
+    background-image: linear-gradient(to bottom right,
+        rgb(4, 104, 89),
+        rgb(11, 151, 130),
+        rgba(87, 236, 214, 0.7)
+    );
     border: 1px solid rgb(47, 171, 152);
     font-family: 'Montserrat';
     color: beige;

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <section class="about-utmost-container-div">
+        <div class="about-description-container-div">
+            <div class="about-title-header-div">
+                About
+            </div>
+            <div class="about-statement-div">
+                {{ about_statement.statement|safe }}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

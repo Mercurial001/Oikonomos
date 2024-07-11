@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'registration.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+</head>
+<body>
+    <section class="registration-utmost-container-section">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="registration-messages-container-div">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="registration-form-container-div">
+            <form class='registration-form' method="POST">
+                <div class="registration-form-header-div">
+                    Register
+                </div>
+                {% csrf_token %}
+                <div class="registration-input-container-div">
+                    <input placeholder="Username"
+                           class='registration-register-input' type="text" name="username" required>
+                </div>
+                <div class="registration-input-container-div">
+                    <input placeholder="Email"
+                           class='registration-register-input' type="email" name="email" required>
+                </div>
+                <div class="registration-input-container-div">
+                    <input placeholder="Password"
+                           class='registration-register-input' type="password" name="password1" required>
+                </div>
+                <div class="registration-input-container-div">
+                    <input placeholder="Confirm Password"
+                           class='registration-register-input' type="password" name="password2" required>
+                </div>
+                <div class="registration-register-btn-container-div">
+                    <button class="registration-register-btn"
+                            type="submit">
+                        Register
+                    </button>
+                </div>
+                <div class="registration-login-link-container-div">
+                    <a class="registration-login-link" href="{% url 'login' %}">Sign in</a>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

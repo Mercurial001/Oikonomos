@@ -1,0 +1,82 @@
+.contact-utmost-container-div{
+    text-align: center;
+    color: beige;
+    font-family: 'Montserrat';
+}
+
+.contact-form-container-div{
+    padding: 20px;
+}
+
+.contact-title-header-div{
+    font-size: 25px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 20px;
+}
+
+.contact-form{
+    border: 1px solid rgb(10, 146, 110);
+    margin: auto;
+    width: 40%;
+    border-radius: 10px;
+    height: 270px;
+    margin-top: 20px;
+}
+
+.contact-input-field-div{
+    margin: 10px;
+}
+
+.contact-input-field{
+    width: 90%;
+    margin: 10px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid rgb(4, 122, 90);
+}
+
+.auto-growth{
+    resize: none;
+    width: 89%;
+    height:1px;
+    margin: 10px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid rgb(4, 122, 90);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.contact-input-field:focus{
+    outline: none;
+}
+
+.auto-growth:focus{
+    outline: none;
+}
+
+.contact-btn-container-div{
+    margin-top: 10px;
+}
+
+.contact-send-message-btn{
+    background-image: linear-gradient(to bottom right,
+        rgb(1, 53, 36),
+        rgb(3, 132, 89),
+        rgb(58, 245, 183)
+    );
+    font-family: 'Montserrat';
+    border: 1px solid rgb(10, 127, 87);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: beige;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+

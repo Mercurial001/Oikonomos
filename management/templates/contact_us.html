@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <section class="contact-utmost-container-div">
+        <div class="contact-form-container-div">
+            <div class="contact-title-header-div">
+                Contact Me
+            </div>
+            <form class='contact-form' method="POST">
+                {% csrf_token %}
+                <div class="contact-input-field-div">
+                    {% if request.user.is_authenticated %}
+                        <input class="contact-input-field"
+                               type="hidden"
+                               name="sender-email-authenticated"
+                               value="{{ request.user.email }}">
+                    {% else %}
+                        <input class="contact-input-field"
+                               placeholder="Email"
+                               type="text"
+                               name="sender-email"
+                               required
+                        >
+                    {% endif %}
+                </div>
+                <div class="contact-input-field-div">
+                    <input class="contact-input-field"
+                           placeholder="Subject"
+                           type="text"
+                           name="subject"
+                           required
+                    >
+                </div>
+                <div class="contact-input-field-div">
+                    <textarea class="auto-growth"
+                              name="contact-message"
+                              id=""
+                              placeholder="Message"
+                              required>
+
+                    </textarea>
+                </div>
+                <div class="contact-btn-container-div">
+                    <button class="contact-send-message-btn" type="submit">Send</button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+{% endblock %}

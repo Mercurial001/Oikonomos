@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+</head>
+<body>
+    <section class="login-utmost-container-section">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="login-message-container-div">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="login-title-header-div">
+            Welcome to Oikonomos
+        </div>
+        <form class="login-form" method="POST">
+            {% csrf_token %}
+            <div class="login-input-container-div">
+                <input placeholder="Username" class='login-field' type="text" name="username">
+            </div>
+            <div class="login-input-container-div">
+                <input placeholder="Password" class='login-field' type="password" name="password">
+            </div>
+            <div class="login-submit-btn-container">
+                <button class='login-submit-btn' type="submit">Login</button>
+            </div>
+            <div class="login-link-registration-div">
+                <a class="login-registration-link" href="{% url 'registration' %}">Sign up</a>
+                <a class="login-registration-link" href="{% url 'homepage' %}">Home</a>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

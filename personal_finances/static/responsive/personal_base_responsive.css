@@ -1,0 +1,276 @@
+@media only screen and (max-width:1305px) {
+    .personal-base-finances-panel-div{
+        width: 93%;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: 25px;
+    }
+}
+
+@media only screen and (max-width: 1265px) {
+    .personal-base-finances-panel-div{
+        width: 96%;
+    }
+    .base-finance-net-balance-div{
+        margin-left: 10px;
+    }
+}
+
+@media only screen and (max-width:1225px) {
+    .personal-base-finances-panel-div{
+        width: 98%;
+        margin-left: -10px;
+    }
+    .base-finance-net-balance-div{
+        margin-left: -10px;
+    }
+    .personal-base-nav-bar-div{
+        width:18%;
+    }
+}
+
+@media only screen and (max-width: 1198px) {
+    .personal-base-nav-bar-div{
+        z-index: 2;
+        margin-top:-10px;
+        left:-500px;
+        width: 300px;
+    }
+
+    .personal-base-block-content-div{
+        margin:auto;
+        width: 90%;
+        float: none;
+        margin-right:5px;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: 0px;
+    }
+
+    .personal-base-finances-panel-div{
+        width: 90%;
+        margin-left: 0px;
+    }
+}
+
+@media only screen and (max-width: 1162px) {
+    .personal-base-finances-panel-div{
+        width: 92%;
+    }
+}
+
+@media only screen and (max-width: 1138px) {
+    .personal-base-finances-panel-div{
+        width: 95%;
+        margin-left: -25px;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: -25px;
+    }
+}
+
+@media only screen and (max-width: 1102px) {
+    .personal-base-finances-panel-div{
+        width: 98%;
+    }
+}
+
+@media only screen and (max-width: 1070px) {
+    .personal-base-finances-panel-div{
+        width: 99%;
+        margin-left: -45px;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: -45px;
+    }
+}
+
+@media only screen and (max-width: 1070px) {
+    .personal-base-finances-panel-div{
+        width: 99%;
+        margin-left: -45px;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: -45px;
+    }
+}
+
+@media only screen and (max-width: 1055px) {
+    .personal-base-finances-panel-div{
+        width: 103%;
+        margin-left: -65px;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: -65px;
+    }
+}
+
+@media only screen and (max-width: 1004px) {
+    .personal-base-finances-panel-div{
+        width: 106%;
+        margin-left: -75px;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: -75px;
+    }
+}
+
+@media only screen and (max-width: 987px) {
+    .personal-base-finances-panel-div{
+        width: 108.1%;
+        margin-left: -85px;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: -85px;
+    }
+}
+
+@media only screen and (max-width: 987px) {
+    .personal-base-finances-panel-div{
+        margin-left: -83px;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: -83px;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .personal-base-finances-panel-div{
+        margin: auto;
+        width: 90%;
+        margin-left: -5px;
+        min-height: 154vh;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: -15px;
+        width: 120px;
+    }
+
+    .personal-base-finances-block-element{
+        margin-top: 10px;
+        margin: auto;
+        width: 90%;
+        margin-top: 10px;
+    }
+
+    .personal-base-graph-chart-div{
+        margin: auto;
+        width: 93%;
+        margin-top: 10px;
+    }
+
+    #personal-base-received-funds{
+        float: none;
+    }
+
+    #personal-base-fund{
+        float: none;
+    }
+
+    #funds-graph-chart{
+        float: none;
+    }
+
+    #funds-donut-chart{
+        float: none;
+    }
+
+    .personal-base-finance-mode-expense{
+        margin: auto;
+        width: 90%;
+        margin-top: 10px;
+    }
+
+    #personal-base-expenses{
+        float: none;
+    }
+
+    #personal-base-fund-expenditure{
+        float: none;
+    }
+
+    #expenses-graph-chart{
+        float: none;
+    }
+
+    #expenses-donut-chart{
+        float: none;
+    }
+}
+
+@media only screen and (max-width:634px) {
+    .personal-base-finances-toggle-finances-btn-container-div{
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (max-width:520px) {
+    .personal-base-remove-fund-data-btn{
+    }
+}
+
+@media only screen and (max-width: 452px) {
+    .personal-base-finances-panel-div{
+        margin: auto;
+        width: 100%;
+        margin-left: -25px;
+        min-height: 154vh;
+    }
+
+    .base-finance-net-balance-div{
+        margin-left: -5px;
+    }
+
+    .personal-base-toggle-btns-container-div{
+        top: 55px;
+    }
+
+    .personal-base-toggle-form-btn{
+        display: block;
+        margin: 5px;
+        width: 140px;
+    }
+}
+
+@media only screen and (max-width: 427px) {
+    .personal-base-nav-bar-div{
+        /*left:-500px;*/
+        width: 50%;
+    }
+
+    .personal-base-unordered-list{
+        margin-left: -30px;
+    }
+
+    .personal-base-nav-link{
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 391px) {
+    .personal-base-finances-panel-div{
+        margin: auto;
+        width: 100%;
+        margin-left: -23px;
+        min-height: 154vh;
+    }
+}
+
+@media only screen and (max-width: 317px) {
+    .personal-base-finances-panel-div{
+        margin: auto;
+        width: 100%;
+        margin-left: -21px;
+        min-height: 154vh;
+    }
+}

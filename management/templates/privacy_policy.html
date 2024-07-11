@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <section class="privacy-policy-utmost-container-section">
+        <div class="privacy-policy-description-div">
+            <div class="privacy-policy-title-header-div">
+                Privacy Policy
+            </div>
+            {{ privacy_policy_obj.statement|safe }}
+        </div>
+    </section>
+
+{% endblock %}

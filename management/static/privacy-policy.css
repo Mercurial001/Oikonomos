@@ -1,0 +1,25 @@
+.privacy-policy-utmost-container-section{
+    padding: 10px;
+}
+
+.privacy-policy-title-header-div{
+    text-align: center;
+    color: beige;
+    font-family: 'Montserrat';
+    font-size: 25px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.privacy-policy-description-div{
+    margin: auto;
+    width: 50%;
+    font-family: 'Montserrat';
+    color: beige;
+    line-height: 25px;
+    background-color: rgb(7, 69, 53);
+    padding: 20px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+}

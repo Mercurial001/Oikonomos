@@ -3,16 +3,23 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oikonomos</title>
     <link rel="stylesheet" href="{% static 'personal_base.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive/personal_base_responsive.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="{% static 'chart.umd.js' %}"></script>
     <script src="{% static 'jquery-3.6.4.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 <body>
+
     {% if request.user.username == user.username and request.user.id == user.id %}
+        <button class="personal-base-toggle-side-bar-nav" type="button">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
         <div class="personal-base-nav-bar-div">
             <ul class="personal-base-unordered-list">
                 <li class="personal-base-list">
@@ -34,10 +41,11 @@
                 </li>
             </ul>
         </div>
+        <div class="personal-base-toggle-side-bar-cover"></div>
         <div class="personal-base-block-content-div">
             {% block content %}
                 <div class="personal-base-header-title-div">
-                    <p class="personal-base-header-title">
+                    <p class="personal-base-header-title" id="screen-width">
                         Oikonomos
                     </p>
                     <div class="personal-base-toggle-btns-container-div">
@@ -331,7 +339,6 @@
                                                 </form>
                                             </div>
                                         </div>
-
                                     {% empty %}
                                         <div>
                                             No Available Funds
@@ -422,37 +429,33 @@
                         </div>
                     </div>
                 </div>
-<!--               {% for category, expenses in categorized_expense.items %}-->
-<!--                    <div>-->
-<!--                        {{ category }}-->
-<!--                    </div>-->
-<!--                    <div>-->
-<!--                        {% for expense in expenses %}-->
-<!--                            <div>-->
-<!--                                - {{ expense }}-->
-<!--                            </div>-->
-<!--                        {% endfor %}-->
-<!--                    </div>-->
-<!--                {% endfor %}-->
-<!--                {{ vocabulary }}-->
-<!--                {% for name in clean_expense_name_list %}-->
-<!--                    <div>-->
-<!--                        {{ name }}-->
-<!--                    </div>-->
-<!--                {% endfor %}-->
-
-<!--                {% for name, expense in expenses_dict.items %}-->
-<!--                    <div>-->
-<!--                        {{ name }}-->
-<!--                    </div>-->
-<!--                {% endfor %}-->
-<!--                <a href="{% url 'create-new-worth-flow' request.user.username %}">Create Net Worth</a>-->
             {% endblock %}
-
         </div>
+
     {% else %}
         You Are not Authorized to Access this Page
     {% endif %}
+    <script>
+
+        const screenWidth = document.querySelector('#screen-width');
+        const sideBar = document.querySelector('.personal-base-nav-bar-div');
+
+        document.addEventListener('DOMContentLoaded', ()=>{
+            let width = window.innerWidth;
+            screenWidth.innerHTML = width;
+        });
+
+        window.addEventListener('resize', ()=> {
+            let windowWidth = window.innerWidth;
+            screenWidth.innerHTML = windowWidth;
+
+            if (windowWidth > 1198) {
+                sideBar.style.left = '0px';
+            } else {
+                sideBar.style.left = '-500px';
+            }
+        });
+    </script>
     <script>
         const toggleFormBtns = document.querySelectorAll('.personal-base-toggle-form-btn');
 
@@ -873,6 +876,29 @@
 
                 revertForm.classList.remove('personal-base-remove-expense-form-show');
                 toggleRemoveExpenseFormBtn.classList.remove('personal-remove-expense-data-btn-hide');
+            });
+        });
+    </script>
+
+    <script>
+        const toggleSideBarBtn = document.querySelector('.personal-base-toggle-side-bar-nav');
+        // .personal-base-toggle-side-bar-cover
+        // .personal-base-nav-bar-div
+
+        // personal-base-toggle-side-bar-cover-toggle
+        // personal-base-nav-bar-div-toggle
+
+        toggleSideBarBtn.addEventListener('click', ()=> {
+            const sideBar = document.querySelector('.personal-base-nav-bar-div');
+            const sideBarCover = document.querySelector('.personal-base-toggle-side-bar-cover');
+
+            sideBar.style.left = '0px';
+            // sideBar.classList.add('personal-base-nav-bar-div-toggle');
+            sideBarCover.classList.add('personal-base-toggle-side-bar-cover-toggle');
+
+            sideBarCover.addEventListener('click', ()=> {
+                sideBar.style.left = '-500px';
+                sideBarCover.classList.remove('personal-base-toggle-side-bar-cover-toggle');
             });
         });
     </script>

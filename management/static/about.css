@@ -1,0 +1,20 @@
+.about-description-container-div{
+    margin: auto;
+    width: 55%;
+    padding: 20px;
+    background-color: rgb(7, 69, 53);
+    font-family: 'Montserrat';
+    color: beige;
+}
+
+.about-title-header-div{
+    text-align: center;
+    font-size: 25px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.about-statement-div{
+    line-height: 30px;
+}

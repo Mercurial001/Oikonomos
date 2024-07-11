@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <section class="terms-utmost-container-section">
+        <div class="terms-description-container-div">
+            <div class="terms-title-header-div">
+                Terms of Service
+            </div>
+            <div class="terms-statement-div">
+                {{ terms_statement.statement|safe }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
