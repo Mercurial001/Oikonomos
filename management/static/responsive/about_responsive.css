@@ -1,0 +1,14 @@
+@media only screen and (max-width: 651px) {
+    .about-description-container-div{
+        width: 90%;
+        padding: 10px;
+    }
+
+    .about-title-header-div{
+        text-align: center;
+        font-size: 25px;
+        letter-spacing: 2px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+}

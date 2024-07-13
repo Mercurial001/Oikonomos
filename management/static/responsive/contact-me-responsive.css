@@ -1,0 +1,11 @@
+@media only screen and (max-width: 651px) {
+    .contact-form{
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 462px) {
+    .contact-form{
+        width: 90%;
+    }
+}

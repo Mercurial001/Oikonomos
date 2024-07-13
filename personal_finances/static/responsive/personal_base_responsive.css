@@ -109,6 +109,10 @@
     .base-finance-net-balance-div{
         margin-left: -65px;
     }
+
+    .personal-base-header-title{
+        margin-top: 50px;
+    }
 }
 
 @media only screen and (max-width: 1004px) {
@@ -214,6 +218,14 @@
     }
 }
 
+@media only screen and (max-width: 600px) {
+    .base-form-finance-div{
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
 @media only screen and (max-width:520px) {
     .personal-base-remove-fund-data-btn{
     }
@@ -240,6 +252,11 @@
         margin: 5px;
         width: 140px;
     }
+
+    .personal-base-header-title{
+        margin-top: 10px;
+        font-size:25px;
+    }
 }
 
 @media only screen and (max-width: 427px) {
@@ -254,6 +271,15 @@
 
     .personal-base-nav-link{
         font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .base-form-finance-div{
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
     }
 }
 

@@ -205,7 +205,13 @@ body{
 }
 
 #base-finance-form3{
-    width: 23.9%;
+    /*width: 23.9%;*/
+}
+
+#hidasha{
+    height: 0px;
+    overflow:hidden;
+    visibility: hidden;
 }
 
 .base-form-finance-div-show{
@@ -358,6 +364,10 @@ body{
     float: left;
 }
 
+personal-base-fund-data-container-div{
+    max-height: 200px;
+    overflow-y:scroll;
+}
 
 .personal-base-finances-data-container-div{
     max-height: 200px;

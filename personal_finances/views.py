@@ -33,7 +33,24 @@ def index(request, username):
     for fund_object in fund_net_flow_objects:
         fund_list_indexing.append(fund_object)
 
-    funds_flow = PersonalNetWorthFlow.objects.filter(removed=False, user=user).order_by('date_time')[len(fund_net_flow_objects) - 10:]
+    def adjustable_index(dynamic_number, constant_number):
+        if dynamic_number > constant_number:
+            # if len(fund_net_flow_objects) > 10
+            indexer = dynamic_number - constant_number
+            if indexer > constant_number:
+                return constant_number
+            else:
+                return indexer
+        else:
+            return 0
+
+    if len(fund_net_flow_objects) != 0 and len(fund_list_indexing) > 10:
+        funds_flow = PersonalNetWorthFlow.objects.filter(
+            removed=False,
+            user=user
+        ).order_by('date_time')[len(fund_net_flow_objects) - adjustable_index(len(fund_net_flow_objects), 10):]
+    else:
+        funds_flow = PersonalNetWorthFlow.objects.filter(removed=False, user=user).order_by('date_time')
 
     fund_flow_label = []
     for fund_obj in funds_flow:
@@ -240,6 +257,7 @@ def index(request, username):
                 name=personal_fund_name,
                 amount=float(personal_fund_amount),
                 date=timezone.now().date(),
+                fund=personal_fund,
                 date_time=timezone.now(),
                 document=personal_fund_document,
             )
@@ -248,7 +266,8 @@ def index(request, username):
             PersonalNetWorthFlow.objects.create(
                 fund=personal_fund,
                 user=user,
-                amount=net_worth.amount + float(personal_fund_amount),
+                # amount=net_worth.amount + float(personal_fund_amount), Solved 7/12/2024
+                amount=net_worth.amount,
                 amount_added=float(personal_fund_amount),
                 date=timezone.now().date(),
                 date_time=timezone.now(),
@@ -301,7 +320,8 @@ def index(request, username):
             PersonalNetWorthFlow.objects.create(
                 expense=personal_expense,
                 user=user,
-                amount=personal_net_worth.amount - float(personal_expense_amount),
+                # amount=personal_net_worth_main.amount - float(personal_expense_amount), Solved on 7/12/2024 12:20 pm
+                amount=personal_net_worth.amount,
                 amount_added=float(personal_expense_amount),
                 date=timezone.now().date(),
                 date_time=timezone.now(),
@@ -332,7 +352,8 @@ def index(request, username):
                 user=user,
                 fund=fund,
                 amount=fund_amount_added,
-                net_worth_amount=personal_net_worth.amount + float(fund_amount_added),
+                # net_worth_amount=personal_net_worth.amount + float(fund_amount_added), Solved 7/12/2024
+                net_worth_amount=personal_net_worth.amount,
                 date=timezone.now().date(),
                 date_time=timezone.now(),
             )
@@ -341,7 +362,8 @@ def index(request, username):
             PersonalNetWorthFlow.objects.create(
                 fund=fund,
                 user=user,
-                amount=personal_net_worth.amount + float(fund_amount_added),
+                # amount=personal_net_worth.amount + float(fund_amount_added), Solved 7/12/2024
+                amount=personal_net_worth.amount,
                 amount_added=float(fund_amount_added),
                 date=timezone.now().date(),
                 date_time=timezone.now(),

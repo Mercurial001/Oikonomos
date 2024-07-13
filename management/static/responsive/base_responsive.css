@@ -1,0 +1,208 @@
+@media only screen and (max-width: 1219px) {
+    .base-header{
+        width: 98%;
+    }
+}
+
+@media only screen and (max-width: 977px) {
+    .base-header{
+        width: 97.8%;
+    }
+}
+
+@media only screen and (max-width: 918px) {
+    .base-page-showcase-title-div{
+        text-align: center;
+        font-size: 40px;
+        font-weight: 800;
+        text-transform: uppercase;
+        position: absolute;
+        top: 160px;
+        right:34.5%;
+    }
+
+    .base-page-showcase-subtitle-div{
+        position: absolute;
+        top: 220px;
+        right:34.5%;
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width:887px) {
+    .base-header{
+        width: 97.6%;
+    }
+}
+
+@media only screen and (max-width:813px) {
+    .base-header{
+        width: 97.3%;
+    }
+}
+
+@media only screen and (max-width:723px) {
+    .base-header{
+        width: 97%;
+    }
+}
+
+@media only screen and (max-width: 721px) {
+    .base-page-showcase-title-div{
+        text-align: center;
+        font-size: 40px;
+        font-weight: 800;
+        text-transform: uppercase;
+        position: absolute;
+        top: 160px;
+        right:29.5%;
+    }
+
+    .base-page-showcase-subtitle-div{
+        position: absolute;
+        top: 220px;
+        right:29.5%;
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width:651px) {
+    .base-header{
+        position: fixed;
+        left: -500px;
+        float: none;
+        padding: 10px;
+        overflow: hidden;
+        width: 40%;
+        min-height: 100vh;
+    }
+
+    .base-unordered-list{
+        list-style: none;
+        float: none;
+        margin-left: -40px;
+    }
+
+    .base-list-link{
+        display: block;
+        margin-top: 30px;
+        float: none;
+    }
+
+    #base-login-link{
+        background: none;
+        border: none;
+    }
+
+    #base-registration-link{
+        background: none;
+        border: none;
+    }
+}
+
+@media only screen and (max-width: 569px) {
+    .base-footer-detail-lists{
+        padding-bottom: 10px;
+        padding-top: 10px;
+        float: none;
+    }
+
+    .base-footer{
+        padding-top: 50px;
+    }
+
+    .base-footer-copyright-div{
+        margin-bottom: -70px;
+    }
+}
+
+@media only screen and (max-width:558px) {
+    .base-page-showcase-title-div{
+        text-align: center;
+        font-size: 40px;
+        font-weight: 800;
+        text-transform: uppercase;
+        position: absolute;
+        top: 160px;
+        right:25%;
+    }
+
+    .base-page-showcase-subtitle-div{
+        position: absolute;
+        top: 220px;
+        right:25%;
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 472px) {
+    .base-page-showcase-title-div{
+        text-align: center;
+        font-size: 40px;
+        font-weight: 800;
+        text-transform: uppercase;
+        position: absolute;
+        top: 160px;
+        right:20%;
+    }
+
+    .base-page-showcase-subtitle-div{
+        position: absolute;
+        top: 220px;
+        right:20%;
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width:454px) {
+    .base-header{
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width:430px) {
+    .base-block-element-div{
+        width: 85%;
+        margin-left: 25px;
+    }
+
+    .base-header{
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width:377px) {
+    .base-block-element-div{
+        width: 85%;
+        margin: 10px;
+    }
+
+    .base-header{
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 353px) {
+    .base-page-showcase-title-div{
+        text-align: center;
+        font-size: 30px;
+        font-weight: 800;
+        text-transform: uppercase;
+        position: absolute;
+        top: 160px;
+        right:23%;
+    }
+
+    .base-page-showcase-subtitle-div{
+        position: absolute;
+        top: 220px;
+        right:18%;
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 287px) {
+    .base-block-element-div{
+        width: 200px;
+    }
+}

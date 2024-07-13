@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oikonomos</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'about.css' %}">
     <link rel="stylesheet" href="{% static 'privacy-policy.css' %}">
     <link rel="stylesheet" href="{% static 'terms-of-use.css' %}">
-    <link rel="stylesheet" href="{% static 'about.css' %}">
     <link rel="stylesheet" href="{% static 'contact-me.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive/base_responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive/about_responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive/privacy-policy-responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive/terms-of-use-responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive/contact-me-responsive.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <script src="{% static 'chart.umd.js' %}"></script>
     <script src="{% static 'jquery-3.6.4.min.js' %}"></script>
@@ -58,6 +64,9 @@
             </div>
             <div class="base-page-showcase-subtitle-div">
                 track, manage expenses and finances
+            </div>
+            <div id="screen-width">
+
             </div>
         </div>
         <div class="base-information-block-div">
@@ -168,6 +177,22 @@
     </section>
     <script>
         autosize(document.querySelectorAll('.auto-growth'));
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=> {
+            const screenWidthDiv = document.querySelector('#screen-width');
+
+            let screenWidth = window.innerWidth;
+
+            screenWidthDiv.innerHTML = screenWidth;
+
+            window.addEventListener('resize', ()=> {
+                let width = window.innerWidth;
+                screenWidthDiv.innerHTML = width;
+            });
+        });
+
+
     </script>
 </body>
 </html>

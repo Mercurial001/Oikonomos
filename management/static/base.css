@@ -44,7 +44,6 @@ body{
 
 .base-list-link{
     display: inline-block;
-
 }
 
 .base-page-link{
@@ -95,13 +94,13 @@ body{
     text-transform: uppercase;
     position: absolute;
     top: 160px;
-    right:510px;
+    right:38%;
 }
 
 .base-page-showcase-subtitle-div{
     position: absolute;
     top: 220px;
-    right:525px;
+    right:38%;
     font-size: 14px;
 }
 
